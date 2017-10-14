@@ -18,41 +18,55 @@
 *		of future plagiarism checking)
 */
 
-#include <iostream>
-#include "DynamicArray.h"
+#ifndef DOUBLYLINKEDLIST_H_
+#define DOUBLYLINKEDLIST_H_
 
-int main()
+template<typename T>
+class DoublyLinkedList
 {
-	DynamicArray<int> dynamic = DynamicArray<int>();
+private:
+	template<typename R>
+	struct Node
+	{
+		R mData;
+		Node<R> *mPrev;
+		Node<R> *mNext;
 
-	std::cout << "Add testing: " << std::endl;
-	dynamic.add(0);
-	dynamic.add(1);
-	dynamic.add(2);
-	dynamic.add(3);
-	dynamic.add(4);
-	dynamic.add(5);
-	dynamic.add(6);
-	dynamic.add(7);
-	dynamic.add(8);
-	dynamic.add(9);
-	dynamic.add(10);
-	std::cin.get();
+		Node() : Node(R())
+		{
+			
+		}
 
-	std::cout << "Remove testing: " << std::endl;
-	dynamic.remove(4);
-	dynamic.remove(0);
-	dynamic.remove(-1);
-	std::cin.get();
+		Node(R data) :
+			mData(data),
+			mPrev(nullptr),
+			mNext(nullptr)
+		{
 
-	std::cout << "Set testing: " << std::endl;
-	dynamic.set(0, 100);
-	dynamic.set(1, -1);
-	dynamic.set(0, -2);
-	dynamic.set(8, 15);
-	dynamic.set(9, 20);
-	dynamic.set(-1, 1000);
-	std::cin.get();
+		}
 
-	return 0;
-}
+		~Node()
+		{
+			mPrev = nullptr;
+			mNext = nullptr;
+		}
+	};
+
+public:
+	Node<T> *mHead;
+	Node<T> *mTail;
+	int mCount;
+
+	DoublyLinkedList();
+	~DoublyLinkedList();
+
+	void getCount() const;
+	T getData(int index) const;
+
+	void add(T element);
+	void remove(T element);
+	void removeAt(int index, T element);
+	void set(int index, T element);
+};
+
+#endif

@@ -1,3 +1,23 @@
+/*
+*	Author:				Andrew Rimpici
+*	Class:				Data Structures and Algorithms CSI-281-01
+*	Assignment:			PA5
+*	Date Assigned:		10/16/2017
+*	Due Date:			10/19/2017
+*
+*	Description:
+*		A program that tests the insertion and deletion of different data structures.
+*
+*	Certification of Authenticity:
+*		I certify that this is entirely my own work, except where I have given fully-documented
+*		references to the work of others. I understand the definition and consequences of plagiarism
+*		and acknowledge that the assessor of this assignment may, for the purpose of assessing this
+*		assignment:-Reproduce  this  assignment  and  provide  a  copy  to  another  member  of
+*		academic staff; and/or-Communicate a copy of this assignment to a plagiarism checking
+*		service (which may then retain a copy of this assignment on its database for the purpose
+*		of future plagiarism checking)
+*/
+
 #ifndef DYNAMIC_ARRAY_H_
 #define DYNAMIC_ARRAY_H_
 
@@ -18,6 +38,7 @@ public:
 	~DynamicArray();
 
 	void add(T element);
+	void get(int index);
 	void print();
 	bool remove(T element);
 	bool removeAt(int index);
@@ -65,6 +86,12 @@ void DynamicArray<T>::print()
 		std::cout << mArrPtr[i] << " ";
 	}
 	std::cout << mArrPtr[mLength - 1] << "]" << std::endl;
+}
+
+template<typename T>
+void DynamicArray<T>::get(int index)
+{
+	return mArrPtr[index];
 }
 
 template<typename T>
