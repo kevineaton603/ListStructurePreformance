@@ -1,8 +1,7 @@
-#include <iostream>
+/*#include <iostream>
 
 int main()
 {
-	std::cout << "Hello, world!" << std::endl;
-	std::cin.get();
+	std::cout << "Hello, World!" << std::endl;
 	return 0;
-}
+}*/
