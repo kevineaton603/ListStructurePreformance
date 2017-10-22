@@ -1,6 +1,7 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 #include<iostream>
+#include"DynamicArray.h"
 template<typename T>
 class LinkedList
 {

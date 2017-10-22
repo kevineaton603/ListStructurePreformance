@@ -17,7 +17,7 @@
 *		service (which may then retain a copy of this assignment on its database for the purpose
 *		of future plagiarism checking)
 */
-
+/*
 #include <iostream>
 #include "DynamicArray.h"
 
@@ -56,3 +56,4 @@ int main()
 
 	return 0;
 }
+*/

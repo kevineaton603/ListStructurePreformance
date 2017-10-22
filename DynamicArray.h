@@ -44,6 +44,7 @@ public:
 	bool removeAt(int index);
 	void resizeArray(int newCapacity);
 	bool set(int index, T element);
+	T DynamicArray<T>::operator[](int index);
 };
 
 template<typename T>
@@ -72,7 +73,7 @@ void DynamicArray<T>::add(T element)
 	mArrPtr[mLength] = element;
 	++mLength;
 
-	print();
+	//print();
 }
 
 template<typename T>
@@ -172,5 +173,9 @@ bool DynamicArray<T>::set(int index, T element)
 	print();
 	return successful;
 }
-
+template <typename T>
+T DynamicArray<T>::operator[](int index)
+{ 
+	return mArrPtr[index]; 
+}
 #endif
