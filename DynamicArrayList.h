@@ -1,5 +1,5 @@
 /*
-*	Author:				Andrew Rimpici
+*	Author:				Andrew Rimpici, Kevin Eaton
 *	Class:				Data Structures and Algorithms CSI-281-01
 *	Assignment:			PA5
 *	Date Assigned:		10/16/2017
@@ -18,13 +18,13 @@
 *		of future plagiarism checking)
 */
 
-#ifndef DYNAMIC_ARRAY_H_
-#define DYNAMIC_ARRAY_H_
+#ifndef DYNAMICARRAYLIST_H_
+#define DYNAMICARRAYLIST_H_
 
 #include <iostream>
 
 template<typename T>
-class DynamicArray
+class DynamicArrayList
 {
 private:
 	static const int CAPACITY_MULTIPLIER = 10;
@@ -34,35 +34,90 @@ private:
 	T* mArrPtr;
 
 public:
-	DynamicArray(int capacity = DEFAULT_CAPACITY);
-	~DynamicArray();
+	DynamicArrayList(int capacity = DEFAULT_CAPACITY);
+	~DynamicArrayList();
 
 	void add(T element);
-	void get(int index);
-	void print();
+	T	 get(int index) const;
+	void print() const;
 	bool remove(T element);
 	bool removeAt(int index);
 	void resizeArray(int newCapacity);
 	bool set(int index, T element);
+	T	 operator[](int index) const;
+
+	static DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
+	{
+		if (first == nullptr && second == nullptr)
+		{
+			return nullptr;
+		}
+		else if (first != nullptr && second == nullptr)
+		{
+			return first;
+		}
+		else if (first == nullptr && second!= nullptr)
+		{
+			return second;
+		}
+		else
+		{
+			DynamicArrayList<T> *mergedList = new DynamicArrayList<T>(first->mLength + second->mLength);
+			int firstIndex = 0, secondIndex = 0, mergedIndex = 0;
+			int mergedLength = mergedList->mCapacity;
+
+			while (mergedIndex < mergedLength)
+			{
+				if (firstIndex >= first->mLength)
+				{
+					for (; secondIndex < second->mLength; ++secondIndex, ++mergedIndex)
+					{
+						mergedList->add(second->get(secondIndex));
+					}
+				}
+				else if (secondIndex >= second->mLength)
+				{
+					for (; firstIndex < first->mLength; ++firstIndex, ++mergedIndex)
+					{
+						mergedList->add(first->get(firstIndex));
+					}
+				}
+				else if (first->get(firstIndex) >= second->get(secondIndex))
+				{
+					mergedList->add(second->get(secondIndex));
+					++secondIndex;
+					++mergedIndex;
+				}
+				else if (second->get(secondIndex) >= first->get(firstIndex))
+				{
+					mergedList->add(first->get(firstIndex));
+					++firstIndex;
+					++mergedIndex;
+				}
+			}
+
+			return mergedList;
+		}
+	}
 };
 
 template<typename T>
-DynamicArray<T>::DynamicArray(int capacity) : 
+DynamicArrayList<T>::DynamicArrayList(int capacity) :
 	mCapacity(capacity),
 	mLength(0),
 	mArrPtr(new T[mCapacity])
 {
-
+	
 }
 
 template<typename T>
-DynamicArray<T>::~DynamicArray()
+DynamicArrayList<T>::~DynamicArrayList()
 {
 	delete[] mArrPtr;
 }
 
 template<typename T>
-void DynamicArray<T>::add(T element)
+void DynamicArrayList<T>::add(T element)
 {
 	if (mLength == mCapacity)
 	{
@@ -76,7 +131,7 @@ void DynamicArray<T>::add(T element)
 }
 
 template<typename T>
-void DynamicArray<T>::print()
+void DynamicArrayList<T>::print() const
 {
 	int i;
 
@@ -89,13 +144,13 @@ void DynamicArray<T>::print()
 }
 
 template<typename T>
-void DynamicArray<T>::get(int index)
+T DynamicArrayList<T>::get(int index) const
 {
 	return mArrPtr[index];
 }
 
 template<typename T>
-bool DynamicArray<T>::remove(T element)
+bool DynamicArrayList<T>::remove(T element)
 {
 	bool removed = false;
 	int i;
@@ -112,7 +167,7 @@ bool DynamicArray<T>::remove(T element)
 }
 
 template<typename T>
-bool DynamicArray<T>::removeAt(int index)
+bool DynamicArrayList<T>::removeAt(int index)
 {
 	bool removed = false;
 	if (index >= 0 && index < mLength)
@@ -137,7 +192,7 @@ bool DynamicArray<T>::removeAt(int index)
 }
 
 template<typename T>
-void DynamicArray<T>::resizeArray(int newCapacity)
+void DynamicArrayList<T>::resizeArray(int newCapacity)
 {
 	mCapacity = newCapacity;
 	T* newArr = new T[mCapacity];
@@ -155,7 +210,7 @@ void DynamicArray<T>::resizeArray(int newCapacity)
 }
 
 template<typename T>
-bool DynamicArray<T>::set(int index, T element)
+bool DynamicArrayList<T>::set(int index, T element)
 {
 	bool successful = false;
 	if (index >= 0 && index < mLength)
@@ -173,4 +228,9 @@ bool DynamicArray<T>::set(int index, T element)
 	return successful;
 }
 
+template<typename T>
+T DynamicArrayList<T>::operator[](int index) const
+{
+	return get(index);
+}
 #endif

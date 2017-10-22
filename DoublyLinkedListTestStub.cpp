@@ -18,30 +18,34 @@
 *		of future plagiarism checking)
 */
 
-/*#include <iostream>
+#include "DoublyLinkedList.h"
 
-#include"linkedList.h"
 int main()
 {
-	LinkedList<long> list;
-	for (int i = 1000; i >= 0; i--)
-	{
-		list.insert(i);
-	}
-	for (int i = 1000; i < 2000; i++)
-	{
-		list.insert(i);
-	}
-	list.print();
-	for (int i = 1950; i < 2000; i++)
-	{
-		list.remove(i);
-	}
-	list.print();
-	for (long i = 1900; i < 1950; i++)
-	{
-		list.removeAt(i);
-	}
-	list.print();
+	DoublyLinkedList<int> *first = new DoublyLinkedList<int>();
+	first->insert(5);
+	first->insert(6);
+	first->insert(8);
+	first->insert(9);
+
+	DoublyLinkedList<int> *second = new DoublyLinkedList<int>();
+	second->insert(3);
+	second->insert(6);
+	second->insert(7);
+	second->insert(9);
+	second->insert(10);
+	second->insert(11);
+
+	first->printListAscending();
+	second->printListAscending();
+
+	DoublyLinkedList<int> *merged = DoublyLinkedList<int>::merge(first, second);
+	merged->printListAscending();
+	std::cin.get();
+
+	delete first;
+	delete second;
+	delete merged;
+
 	return 0;
-}*/
+}
