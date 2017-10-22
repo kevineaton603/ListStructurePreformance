@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
-#include<iostream>
+
+#include <iostream>
+
 template<typename T>
 class LinkedList
 {
@@ -190,5 +192,6 @@ void LinkedList<T>::removeAt(long index)
 		mCount--;
 	}
 }
-#endif // !LINKED_LIST_H
+
+#endif
 
