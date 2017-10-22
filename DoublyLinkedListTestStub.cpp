@@ -18,7 +18,7 @@
 *		of future plagiarism checking)
 */
 
-#include "DoublyLinkedList.h"
+/*#include "DoublyLinkedList.h"
 
 int main()
 {
@@ -48,4 +48,4 @@ int main()
 	delete merged;
 
 	return 0;
-}
+}*/

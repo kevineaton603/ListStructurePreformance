@@ -19,77 +19,46 @@
 */
 
 #include <iostream>
-#include "DynamicArrayList.h"
-#include "dynamicArr.h"
-#include "linkedList.h"
-#include <ctime>
+#include"DynamicArray.h"
+#include"LinkedList.h"
+#include<ctime>
 
-int main()
+/*int main()
 {
-	/*
 	DynamicArr<int> list, list2;
+	LinkedList<int> lList, lList2, *lList3;
 	int * intArr;
 	int num1;
-	intArr = new int[1000];
+	intArr = new int[10];
 	srand(unsigned(time(NULL)));
 	for (int i = 10; i > 0; i--)
 	{
 		num1 = rand() % 1000;
 		std::cout << num1 << std::endl;
-		list.insert(num1);
-		
+		lList.insert(num1);
+
 	}
-	list.print();
+	lList.print();
 	std::cout << "Int Array\n\n";
 	for (int i = 0; i < 10; i++)
 	{
 		intArr[i] = rand() % 1000;
 		std::cout << i << ": " << intArr[i] << std::endl;
+		lList2.insert(intArr[i]);
 	}
-	mergeSort(intArr, 0, 9);
-	std::cout << "Int Array\n\n";
-	for (int i = 0; i < 10; i++)
-	{
-		//intArr[i] = rand() % 1000;
-		std::cout << i << ": " << intArr[i] << std::endl;
-	}
-	std::cout << std::endl;
-	std::cout << "List: \n\n";
-	list.print();
-	list2.insert(intArr, 10);
-	std::cout << "List2: \n\n";
-	list2.print();
-	std::cout << std::endl;
-	std::cout << std::endl;
-	list.insert(list2);
-	list.print();
-	
-	LinkedList<long> list;
-	DynamicArray<long> dynamic;
 
-	for (int i = 1000; i >= 0; i--)
-	{
-		list.insert(i);
-		dynamic.add(i);
-	}
-	for (int i = 1000; i < 2000; i++)
-	{
-		list.insert(i);
-		dynamic.add(i);
-	}
-	std::cout << dynamic[3] << std::endl;
-	list.print();
-	for (int i = 1950; i < 2000; i++)
-	{
-		list.remove(i);
-	}
-	list.print();
-	for (long i = 1900; i < 1950; i++)
-	{
-		list.removeAt(i);
-	}
-	list.print();
-	
-	delete[] intArr;*/
+	std::cout << "List: \n\n";
+	lList.print();
+
+	std::cout << "List2: \n\n";
+	lList2.print();
+
+	std::cout << std::endl;
+	lList3 = LinkedList<int>::merge(lList, lList2);
+	lList3->print();
+	std::cout << std::endl;
+	lList.removeAt(9);
+	lList.print();
+	delete[] intArr;
 	return 0;
-}
+}*/

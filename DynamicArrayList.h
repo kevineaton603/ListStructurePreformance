@@ -44,7 +44,6 @@ public:
 	bool removeAt(int index);
 	void resizeArray(int newCapacity);
 	bool set(int index, T element);
-<<<<<<< HEAD:DynamicArrayList.h
 	T	 operator[](int index) const;
 
 	static DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
@@ -100,9 +99,6 @@ public:
 			return mergedList;
 		}
 	}
-=======
-	T DynamicArray<T>::operator[](int index);
->>>>>>> 5d0795eda4410aa3876c03149e4122c71b833a21:DynamicArray.h
 };
 
 template<typename T>
@@ -131,7 +127,7 @@ void DynamicArrayList<T>::add(T element)
 	mArrPtr[mLength] = element;
 	++mLength;
 
-	//print();
+	print();
 }
 
 template<typename T>
@@ -231,17 +227,11 @@ bool DynamicArrayList<T>::set(int index, T element)
 	print();
 	return successful;
 }
-<<<<<<< HEAD:DynamicArrayList.h
 
 template<typename T>
 T DynamicArrayList<T>::operator[](int index) const
 {
 	return get(index);
-=======
-template <typename T>
-T DynamicArray<T>::operator[](int index)
-{ 
-	return mArrPtr[index]; 
->>>>>>> 5d0795eda4410aa3876c03149e4122c71b833a21:DynamicArray.h
 }
+
 #endif

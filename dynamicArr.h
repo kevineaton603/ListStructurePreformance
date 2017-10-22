@@ -1,15 +1,13 @@
 #ifndef DYNAMIC_ARR_H
 #define DYNAMIC_ARR_H
-
-#include <iostream>
-
+#include<iostream>
 template<typename T>
 class DynamicArr
 {
 private:
 	long mSize;
 	T * mArray;
-	void merge(T * list, long size);
+	DynamicArr<T> * merge(T * list, long size);
 	T* getArray();
 
 public:
@@ -20,15 +18,13 @@ public:
 	long getSize();
 
 	void clear();
-	void insert(const T & element);
-	void insert(T * list, long size);
-	void insert(DynamicArr<T> & list);
+	DynamicArr<T> * insert(const T & element);
+	DynamicArr<T> * merge(DynamicArr<T> & list);
 	void print();
 	void remove(T element);
 	void remove(T *list, long size);
 	void remove(DynamicArr<T> * list);
 	void removeAt(long index);
-	void removeFromTo(long lower, long upper);
 
 	T DynamicArr<T>::operator[](int index);
 	
@@ -69,23 +65,18 @@ void DynamicArr<T>::clear()
 	mSize = 0;
 }
 template<typename T>
-void DynamicArr<T>::insert(const T& element)
+DynamicArr<T> * DynamicArr<T>::insert(const T& element)
 {
 	int newElement = element;
-	this->merge(&newElement, 1);
+	return this->merge(&newElement, 1);
 }
 template<typename T>
-void DynamicArr<T>::insert(DynamicArr<T> & list)
+DynamicArr<T> * DynamicArr<T>::merge(DynamicArr<T> & list)
 {
-	this->merge(list.getArray(), list.getSize());
+	return this->merge(list.getArray(), list.getSize());
 }
 template<typename T>
-void DynamicArr<T>::insert(T * list, long size)
-{
-	this->merge(list, size);
-}
-template<typename T>
-void DynamicArr<T>::merge(T * list, long size)
+DynamicArr<T> * DynamicArr<T>::merge(T * list, long size)
 {
 	T * newList;
 	int i, j, k;
@@ -141,6 +132,7 @@ void DynamicArr<T>::print()
 		std::cout << "Array is empty" << std::endl;
 	else
 	{
+		std::cout << "mSize: " << mSize << std::endl;
 		for (long i = 0; i < mSize; i++)
 		{
 			std::cout << mArray[i] << ", ";
@@ -226,12 +218,23 @@ void DynamicArr<T>::remove(DynamicArr<T> * list)
 template<typename T>
 void DynamicArr<T>::removeAt(long index)
 {
-
-}
-template<typename T>
-void DynamicArr<T>::removeFromTo(long lower, long upper)
-{
-
+	T * newList = new T[mSize - 1];
+	long i, j = 0;
+	if (mArray != NULL)
+	{
+		for (i = 0; i < mSize; i++)
+		{
+			if (i == index);
+			else
+			{
+				newList[j] = mArray[i];
+				j++;
+			}
+		}
+		delete[] mArray;
+		mArray = newList;
+		mSize--;
+	}
 }
 template <typename T>
 T DynamicArr<T>::operator[](int index)

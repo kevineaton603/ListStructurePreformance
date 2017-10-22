@@ -26,29 +26,47 @@ private:
 
 		}
 	};
-	Node<T> * mHead;
+	Node<T> * mHead, * mTail;
 	long mCount;
 public:
 	LinkedList();
 	~LinkedList();
+	void append(const T & data);
 	void clear();
 	void insert(T data);
 	bool isExist(T data);
 	bool isEmpty();
+	static LinkedList<T> * merge(LinkedList<T> & list1, LinkedList<T> & list2);
 	void print();
-	void remove(T data);
 	void removeAt(long index);
 };
 template<typename T>
 LinkedList<T>::LinkedList()
 {
 	mHead = NULL;
+	mTail = NULL;
 	mCount = 0;
 }
 template<typename T>
 LinkedList<T>::~LinkedList()
 {
 	this->clear();
+}
+template<typename T>
+void LinkedList<T>::append(const T & data)
+{
+	Node<T> * newNode = new Node<T>(data);
+	if (mHead == NULL)
+	{
+		mHead = newNode;
+		mTail = newNode;
+	}
+	else
+	{
+		mTail->mNext = newNode;
+		mTail = newNode;
+	}
+	mCount++;
 }
 template<typename T>
 void LinkedList<T>::clear()
@@ -63,6 +81,7 @@ void LinkedList<T>::clear()
 		delete toBeDeleted;
 	}
 	mHead = NULL;
+	mTail = NULL;
 	mCount = 0;
 }
 template<typename T>
@@ -74,11 +93,17 @@ void LinkedList<T>::insert(T data)
 	else if (mHead == NULL)
 	{
 		mHead = newNode;
+		mTail = newNode;
 	}
 	else if (data < mHead->mData)
 	{
 		newNode->mNext = mHead;
 		mHead = newNode;
+	}
+	else if (data > mTail->mData)
+	{
+		mTail->mNext = newNode;
+		mTail = newNode;
 	}
 	else 
 	{
@@ -115,51 +140,63 @@ bool LinkedList<T>::isEmpty()
 	return mHead == NULL;
 }
 template<typename T>
+LinkedList<T> * LinkedList<T>::merge(LinkedList<T> & list1, LinkedList<T> & list2)
+{
+	Node<T> * tmp, *tmp2;
+	LinkedList<T> * newList = new LinkedList<T>;
+
+	if (list1.mHead != NULL && list2.mHead != NULL)
+	{
+		if (list1.mHead != NULL && list2.mHead == NULL)
+			newList = &list1;
+		else if (list1.mHead == NULL && list2.mHead != NULL)
+			newList = &list2;
+		else
+		{
+			tmp = list1.mHead;
+			tmp2 = list2.mHead;
+			while (tmp != NULL && tmp2 != NULL)
+			{
+				if (tmp->mData <= tmp2->mData)
+				{
+					newList->append(tmp->mData);
+					tmp = tmp->mNext;
+				}
+				else
+				{
+					newList->append(tmp2->mData);
+					tmp2 = tmp2->mNext;
+				}
+			}
+			while (tmp != NULL)
+			{
+				newList->append(tmp->mData);
+				tmp = tmp->mNext;
+			}
+			while (tmp2 != NULL)
+			{
+				newList->append(tmp2->mData);
+				tmp2 = tmp2->mNext;
+			}
+		}
+	}
+	return newList;
+}
+template<typename T>
 void LinkedList<T>::print()
 {
 	Node<T> * tmp;
+	long i = 0; 
 	if (!this->isEmpty())
 	{
 		tmp = mHead;
 		while (tmp != NULL)
 		{
-			std::cout << tmp->mData << std::endl;
+			std::cout << i << ": " <<tmp->mData << std::endl;
 			tmp = tmp->mNext;
+			i++;
 		}
 	}
-}
-template<typename T>
-void LinkedList<T>::remove(T data)
-{
-	Node<T> * tmp, * oneBefore;
-	bool removed = false;
-	if (mHead->mData == data)
-	{
-		delete mHead;
-		removed = true;
-	}
-	else
-	{
-		tmp = mHead->mNext;
-		oneBefore = mHead;
-		while (tmp != NULL)
-		{
-			if (data == tmp->mData)
-			{
-				oneBefore->mNext = tmp->mNext;
-				delete tmp;
-				removed = true;
-				mCount--;
-			}
-			else
-			{
-				oneBefore = tmp;
-				tmp = tmp->mNext;
-			}
-		}
-	}
-	if (!removed)
-		mCount--;
 }
 template<typename T>
 void LinkedList<T>::removeAt(long index)
