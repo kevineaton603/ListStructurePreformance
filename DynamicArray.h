@@ -43,7 +43,7 @@ public:
 
 	void clear();
 	void insert(const T &element);
-	void insert(T *list, int size);
+	void insert(int index, T element);
 	void insert(DynamicArray<T> &list);
 	void print();
 	void remove(T element);
@@ -104,15 +104,40 @@ void DynamicArray<T>::insert(const T &element)
 }
 
 template<typename T>
-void DynamicArray<T>::insert(DynamicArray<T> &list)
+void DynamicArray<T>::insert(int index, T element)
 {
-	merge(list.getArray(), list.getSize());
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mSize)
+	{
+		index = mSize;
+	}
+
+	T *newArr = new T[++mSize];
+	int i;
+
+	for (i = mSize - 1; i > index; --i)
+	{
+		newArr[i] = mArray[i - 1];
+	}
+
+	newArr[index] = element;
+
+	for (i = index - 1; i >= 0; --i)
+	{
+		newArr[i] = mArray[i];
+	}
+
+	delete[] mArray;
+	mArray = newArr;
 }
 
 template<typename T>
-void DynamicArray<T>::insert(T *list, int size)
+void DynamicArray<T>::insert(DynamicArray<T> &list)
 {
-	merge(list, size);
+	merge(list.getArray(), list.getSize());
 }
 
 template<typename T>
@@ -120,6 +145,7 @@ void DynamicArray<T>::merge(T *list, int size)
 {
 	T *newList;
 	int i, j, k;
+
 	if (mArray == nullptr)
 	{
 		mSize = size;

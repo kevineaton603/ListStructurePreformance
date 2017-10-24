@@ -286,21 +286,18 @@ void DoublyLinkedList<T>::insert(int index, T data)
 		{
 			mHead = newNode;
 			mTail = newNode;
-			++mLength;
 		}
 		else if (index == 0)
 		{
 			newNode->mNext = mHead;
 			mHead->mPrev = newNode;
 			mHead = newNode;
-			++mLength;
 		}
 		else if (index == mLength)
 		{
 			mTail->mNext = newNode;
 			newNode->mPrev = mTail;
 			mTail = newNode;
-			++mLength;
 		}
 		else
 		{
@@ -323,8 +320,9 @@ void DoublyLinkedList<T>::insert(int index, T data)
 			newNode->mPrev = currentNode->mPrev;
 			currentNode->mPrev = newNode;
 			newNode->mPrev->mNext = newNode;
-			++mLength;
 		}
+
+		++mLength;
 	}
 }
 

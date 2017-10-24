@@ -60,6 +60,7 @@ public:
 	void append(const T &data);
 	void clear();
 	void insert(T data);
+	void insert(int index, T data);
 	bool isExist(T data);
 	bool isEmpty();
 	void print();
@@ -159,6 +160,74 @@ void LinkedList<T>::insert(T data)
 	}
 
 	mCount++;
+}
+
+/*
+ * Pre:
+ * Post:
+ * Purpose:
+ * Author: Andrew Rimpici
+*/
+template<typename T>
+void LinkedList<T>::insert(int index, T data)
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mCount)
+	{
+		index = mCount;
+	}
+
+	Node<T> *newNode = new Node<T>(data);
+
+	if (newNode == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		if (mHead == nullptr)
+		{
+			mHead = newNode;
+			mTail = newNode;
+		}
+		else if (index == 0)
+		{
+			newNode->mNext = mHead;
+			mHead = newNode;
+		}
+		else if (index == mCount)
+		{
+			mTail->mNext = newNode;
+			mTail = newNode;
+		}
+		else
+		{
+			Node<T> *previousNode = mHead;
+			Node<T> *currentNode = mHead;
+			int i;
+
+			for (i = 0; i < index; ++i)
+			{
+				if (currentNode->mNext != nullptr)
+				{
+					previousNode = currentNode;
+					currentNode = currentNode->mNext;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			newNode->mNext = currentNode;
+			previousNode->mNext = newNode;
+		}
+
+		++mCount;
+	}
 }
 
 template<typename T>

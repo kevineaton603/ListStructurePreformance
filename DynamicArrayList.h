@@ -237,7 +237,7 @@ template<typename T>
 void DynamicArrayList<T>::resizeArray(int newCapacity)
 {
 	mCapacity = newCapacity;
-	T* newArr = new T[mCapacity];
+	T *newArr = new T[mCapacity];
 	int i;
 
 	for (i = 0; i < mLength; ++i)

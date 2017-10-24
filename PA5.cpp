@@ -18,7 +18,7 @@
 *		of future plagiarism checking)
 */
 
-/*#include <iostream>
+#include <iostream>
 #include "DynamicArray.h"
 #include "LinkedList.h"
 #include <ctime>
@@ -60,9 +60,22 @@ int main()
 	lList.removeAt(9);
 	lList.print();
 	delete[] intArr;
+	delete lList3;
 
-	list.insert(5);
-
+	list.insert(0, 5);
+	list.insert(1, 1);
+	list.insert(1, 2); 
+	list.print();
 	std::cin.get();
+
+	/*LinkedList<int> *insertionTest = new LinkedList<int>();
+
+	insertionTest->insert(0, 1);
+	insertionTest->insert(1, 3);
+	insertionTest->insert(1, 5);
+	insertionTest->print();
+	std::cin.get();
+
+	delete insertionTest;*/
 	return 0;
-}*/
+}
