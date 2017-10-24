@@ -41,6 +41,8 @@ int main()
 	dynamic.remove(4);
 	dynamic.remove(0);
 	dynamic.remove(-1);
+	dynamic.removeAt(0);
+	dynamic.removeAt(10);
 	std::cin.get();
 
 	std::cout << "Set testing: " << std::endl;

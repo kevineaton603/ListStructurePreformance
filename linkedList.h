@@ -260,6 +260,64 @@ bool LinkedList<T>::isEmpty()
 }
 
 template<typename T>
+void LinkedList<T>::print()
+{
+	Node<T> *tmp;
+	int i = 0; 
+	
+	if (!this->isEmpty())
+	{
+		tmp = mHead;
+		
+		while (tmp != nullptr)
+		{
+			std::cout << i << ": " <<tmp->mData << std::endl;
+			tmp = tmp->mNext;
+			i++;
+		}
+	}
+}
+
+template<typename T>
+void LinkedList<T>::removeAt(int index)
+{
+	Node<T> *tmp, *oneBefore;
+	int i = 0;
+	bool removed = false;
+
+	tmp = mHead->mNext;
+	oneBefore = mHead;
+	
+	if (index < 0 || index >= mCount)
+	{
+		return;
+	}
+	else if (mHead != nullptr)
+	{
+		tmp = mHead; 
+		oneBefore = mHead; 
+
+		for (i = 0; i < index; i++)
+		{ 
+			oneBefore = tmp; 
+			tmp = tmp->mNext; 
+		}
+		
+		if (index == 0)
+		{
+			mHead = tmp->mNext;
+		}	
+		else
+		{
+			oneBefore->mNext = tmp->mNext;
+		}
+
+		delete tmp;
+		mCount--;
+	}
+}
+
+template<typename T>
 LinkedList<T>* LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2)
 {
 	Node<T> *tmp, *tmp2;
@@ -298,7 +356,7 @@ LinkedList<T>* LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2)
 				newList->append(tmp->mData);
 				tmp = tmp->mNext;
 			}
-			
+
 			while (tmp2 != nullptr)
 			{
 				newList->append(tmp2->mData);
@@ -309,64 +367,5 @@ LinkedList<T>* LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2)
 
 	return newList;
 }
-
-template<typename T>
-void LinkedList<T>::print()
-{
-	Node<T> *tmp;
-	int i = 0; 
-	
-	if (!this->isEmpty())
-	{
-		tmp = mHead;
-		
-		while (tmp != nullptr)
-		{
-			std::cout << i << ": " <<tmp->mData << std::endl;
-			tmp = tmp->mNext;
-			i++;
-		}
-	}
-}
-
-template<typename T>
-void LinkedList<T>::removeAt(int index)
-{
-	Node<T> *tmp, *oneBefore;
-	int i = 0;
-	bool removed = false;
-
-	tmp = mHead->mNext;
-	oneBefore = mHead;
-	
-	if (index == 0 || index >= mCount)
-	{
-		return;
-	}
-	else if (mHead != nullptr)
-	{
-		tmp = mHead; 
-		oneBefore = mHead; 
-
-		for (i = 0; i < index; i++)
-		{ 
-			oneBefore = tmp; 
-			tmp = tmp->mNext; 
-		}
-		
-		if (index == 0)
-		{
-			mHead = tmp->mNext;
-		}	
-		else
-		{
-			oneBefore->mNext = tmp->mNext;
-		}
-
-		delete tmp;
-		mCount--;
-	}
-}
-
 #endif
 

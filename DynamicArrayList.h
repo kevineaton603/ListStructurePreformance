@@ -41,6 +41,7 @@ public:
 	~DynamicArrayList();
 
 	void add(T element);
+	DynamicArrayList<T>* copy();
 	T	 get(int index) const;
 	int  getSize() const;
 	void insert(int index, T element);
@@ -52,59 +53,7 @@ public:
 
 	T	 operator[](int index) const;
 
-	static DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
-	{
-		if (first == nullptr && second == nullptr)
-		{
-			return nullptr;
-		}
-		else if (first != nullptr && second == nullptr)
-		{
-			return first;
-		}
-		else if (first == nullptr && second!= nullptr)
-		{
-			return second;
-		}
-		else
-		{
-			DynamicArrayList<T> *mergedList = new DynamicArrayList<T>(first->mLength + second->mLength);
-			int firstIndex = 0, secondIndex = 0, mergedIndex = 0;
-			int mergedLength = mergedList->mCapacity;
-
-			while (mergedIndex < mergedLength)
-			{
-				if (firstIndex >= first->mLength)
-				{
-					for (; secondIndex < second->mLength; ++secondIndex, ++mergedIndex)
-					{
-						mergedList->add(second->get(secondIndex));
-					}
-				}
-				else if (secondIndex >= second->mLength)
-				{
-					for (; firstIndex < first->mLength; ++firstIndex, ++mergedIndex)
-					{
-						mergedList->add(first->get(firstIndex));
-					}
-				}
-				else if (first->get(firstIndex) >= second->get(secondIndex))
-				{
-					mergedList->add(second->get(secondIndex));
-					++secondIndex;
-					++mergedIndex;
-				}
-				else if (second->get(secondIndex) >= first->get(firstIndex))
-				{
-					mergedList->add(first->get(firstIndex));
-					++firstIndex;
-					++mergedIndex;
-				}
-			}
-
-			return mergedList;
-		}
-	}
+	static DynamicArrayList<T>* merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second);
 };
 
 template<typename T>
@@ -134,6 +83,22 @@ void DynamicArrayList<T>::add(T element)
 	++mLength;
 
 	print();
+}
+
+template<typename T>
+DynamicArrayList<T>* DynamicArrayList<T>::copy()
+{
+	DynamicArrayList<T> *another = new DynamicArrayList<T>();
+
+	another->mCapacity = mCapacity;
+	int i;
+
+	for (i = 0; i < mLength; ++i)
+	{
+		another->add(get(i));
+	}
+
+	return another;
 }
 
 template<typename T>
@@ -280,6 +245,61 @@ template<typename T>
 T DynamicArrayList<T>::operator[](int index) const
 {
 	return get(index);
+}
+
+template<typename T>
+DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
+{
+	if (first == nullptr && second == nullptr)
+	{
+		return nullptr;
+	}
+	else if (first != nullptr && second == nullptr)
+	{
+		return first->copy();
+	}
+	else if (first == nullptr && second != nullptr)
+	{
+		return second->copy();
+	}
+	else
+	{
+		DynamicArrayList<T> *mergedList = new DynamicArrayList<T>(first->mLength + second->mLength);
+		int firstIndex = 0, secondIndex = 0, mergedIndex = 0;
+		int mergedLength = mergedList->mCapacity;
+
+		while (mergedIndex < mergedLength)
+		{
+			if (firstIndex >= first->mLength)
+			{
+				for (; secondIndex < second->mLength; ++secondIndex, ++mergedIndex)
+				{
+					mergedList->add(second->get(secondIndex));
+				}
+			}
+			else if (secondIndex >= second->mLength)
+			{
+				for (; firstIndex < first->mLength; ++firstIndex, ++mergedIndex)
+				{
+					mergedList->add(first->get(firstIndex));
+				}
+			}
+			else if (first->get(firstIndex) >= second->get(secondIndex))
+			{
+				mergedList->add(second->get(secondIndex));
+				++secondIndex;
+				++mergedIndex;
+			}
+			else if (second->get(secondIndex) >= first->get(firstIndex))
+			{
+				mergedList->add(first->get(firstIndex));
+				++firstIndex;
+				++mergedIndex;
+			}
+		}
+
+		return mergedList;
+	}
 }
 
 #endif

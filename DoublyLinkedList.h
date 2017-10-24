@@ -77,15 +77,16 @@ public:
 	void setData(int index, T data);
 
 	void clear();
+	DoublyLinkedList<T>* copy();
 	void insert(T data);
 	void insert(int index, T data);
 	bool isEmpty();
 	bool isExist(T searchKey);
+	void prepend(T data);
 	void printListAscending();
 	void printListDescending();
-	void prepend(T data);
-	int remove(T data);
-	T removeAt(int index);
+	int  removeAll(T data);
+	T	 removeAt(int index);
 
 	static DoublyLinkedList<T>* merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second);
 };
@@ -203,6 +204,21 @@ void DoublyLinkedList<T>::clear()
 
 	mHead = nullptr;
 	mTail = nullptr;
+}
+
+template<typename T>
+DoublyLinkedList<T>* DoublyLinkedList<T>::copy()
+{
+	DoublyLinkedList<T> *another = new DoublyLinkedList<T>();
+	Node<T> *currentNode = mHead;
+
+	for (int i = 0; i < mLength; ++i)
+	{
+		another->insert(currentNode->mData);
+		currentNode = currentNode->mNext;
+	}
+
+	return another;
 }
 
 /* Pre:		Data to insert into the list.
@@ -366,6 +382,30 @@ bool DoublyLinkedList<T>::isExist(T searchKey)
 	return found;
 }
 
+template<typename T>
+void DoublyLinkedList<T>::prepend(T data)
+{
+	Node<T> *newNode = new Node<T>(data);
+
+	if (newNode == nullptr)
+	{
+		return;
+	}
+	else if (mHead == nullptr)
+	{
+		mHead = newNode;
+		mTail = newNode;
+		++mLength;
+	}
+	else
+	{
+		mTail->mNext = newNode;
+		newNode->mPrev = mTail;
+		mTail = newNode;
+		++mLength;
+	}
+}
+
 /* Pre:		None.
 *  Post:	None.
 *  Purpose: Prints the list from least to greatest.
@@ -406,36 +446,12 @@ void DoublyLinkedList<T>::printListDescending()
 	std::cout << std::endl;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::prepend(T data)
-{
-	Node<T> *newNode = new Node<T>(data);
-	
-	if (newNode == nullptr)
-	{
-		return;
-	}
-	else if (mHead == nullptr)
-	{
-		mHead = newNode;
-		mTail = newNode;
-		++mLength;
-	}
-	else
-	{
-		mTail->mNext = newNode;
-		newNode->mPrev = mTail;
-		mTail = newNode;
-		++mLength;
-	}
-}
-
 /* Pre:		The data value to remove from the list.
 *  Post:	The amount of nodes removed from the list.
 *  Purpose: Removes **ALL OCCURENCES** of the data.
 **************************************************************************************************/
 template<typename T>
-int DoublyLinkedList<T>::remove(T data)
+int DoublyLinkedList<T>::removeAll(T data)
 {
 	int amountRemoved = 0;
 
@@ -548,19 +564,19 @@ DoublyLinkedList<T>* DoublyLinkedList<T>::merge(DoublyLinkedList<T> *first, Doub
 	}
 	else if (first != nullptr && second == nullptr)
 	{
-		return first;
+		return first->copy();
 	}
 	else if (first == nullptr && second != nullptr)
 	{
-		return second;
+		return second->copy();
 	}
 	else if (second->mLength <= 0)
 	{
-		return first;
+		return first->copy();
 	}
 	else if (first->mLength <= 0)
 	{
-		return second;
+		return second->copy();
 	}
 	else
 	{

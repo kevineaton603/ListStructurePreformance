@@ -31,7 +31,6 @@ private:
 	int mSize;
 	T *mArray;
 
-	void merge(T *list, int size);
 	T *getArray();
 
 public:
@@ -44,16 +43,14 @@ public:
 	void clear();
 	void insert(const T &element);
 	void insert(int index, T element);
-	void insert(DynamicArray<T> &list);
 	void print();
 	void remove(T element);
 	void remove(T *list, int size);
 	void remove(DynamicArray<T> *list);
 	void removeAt(int index);
-	void removeFromTo(int lower, int upper);
 	void sort();
-
 	T	 operator[](int index);
+	static DynamicArray<T>* merge(DynamicArray<T> *first, DynamicArray<T> *second);
 };
 
 template<typename T>
@@ -132,69 +129,6 @@ void DynamicArray<T>::insert(int index, T element)
 
 	delete[] mArray;
 	mArray = newArr;
-}
-
-template<typename T>
-void DynamicArray<T>::insert(DynamicArray<T> &list)
-{
-	merge(list.getArray(), list.getSize());
-}
-
-template<typename T>
-void DynamicArray<T>::merge(T *list, int size)
-{
-	T *newList;
-	int i, j, k;
-
-	if (mArray == nullptr)
-	{
-		mSize = size;
-		mArray = new T[mSize];
-
-		for (i = 0; i < mSize; i++)
-		{
-			mArray[i] = list[i];
-		}
-	}
-	else
-	{
-		newList = new T[mSize + size];
-		i = j = k = 0;
-
-		while (i < mSize && j < size)
-		{
-			if (mArray[i] <= list[j])
-			{
-				newList[k] = mArray[i];
-				i++;
-				k++;
-			}
-			else
-			{
-				newList[k] = list[j];
-				j++;
-				k++;
-			}
-		}
-
-		while (i < mSize)
-		{
-			newList[k] = mArray[i];
-			i++;
-			k++;
-		}
-
-		while (j < size)
-		{
-			newList[k] = list[j];
-			j++;
-			k++;
-		}
-
-		delete[] mArray;
-		mArray = newList;
-		mSize += size;
-	}
 }
 
 template<typename T>
@@ -298,13 +232,24 @@ void DynamicArray<T>::remove(DynamicArray<T> *list)
 template<typename T>
 void DynamicArray<T>::removeAt(int index)
 {
-	//Rip needs to be finished
-}
+	if (index >= 0 && index < mSize)
+	{
+		int i;
+		for (i = index; i < mSize - 1; ++i)
+		{
+			mArray[i] = mArray[i + 1];
+		}
 
-template<typename T>
-void DynamicArray<T>::removeFromTo(int lower, int upper)
-{
-	//Rip needs to be finished
+		T *newArr = new T[--mSize];
+
+		for (i = 0; i < mSize; ++i)
+		{
+			newArr[i] = mArray[i];
+		}
+
+		delete[] mArray;
+		mArray = newArr;
+	}
 }
 
 template<typename T>
@@ -317,6 +262,57 @@ template <typename T>
 T DynamicArray<T>::operator[](int index)
 {
 	return mArray[index];
+}
+
+template<typename T>
+DynamicArray<T>* DynamicArray<T>::merge(DynamicArray<T>* first, DynamicArray<T>* second)
+{
+	DynamicArray<T> *mergedList = new DynamicArray<T>();
+	int i, j, k;
+
+	if (first->mArray == nullptr || second->mArray == nullptr)
+	{
+		return mergedList;
+	}
+	else
+	{
+		delete[] mergedList->mArray;
+		mergedList->mSize = first->mSize + second->mSize;
+		mergedList->mArray = new T[mergedList->mSize];
+		i = j = k = 0;
+
+		while (i < first->mSize && j < second->mSize)
+		{
+			if (first->mArray[i] <= second->mArray[j])
+			{
+				mergedList->mArray[k] = first->mArray[i];
+				i++;
+				k++;
+			}
+			else
+			{
+				mergedList->mArray[k] = second->mArray[j];
+				j++;
+				k++;
+			}
+		}
+
+		while (i < first->mSize)
+		{
+			mergedList->mArray[k] = first->mArray[i];
+			i++;
+			k++;
+		}
+
+		while (j < second->mSize)
+		{
+			mergedList->mArray[k] = second->mArray[j];
+			j++;
+			k++;
+		}
+
+		return mergedList;
+	}
 }
 
 #endif

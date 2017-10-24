@@ -25,7 +25,7 @@
 
 int main()
 {
-	DynamicArray<int> list, list2;
+	/*DynamicArray<int> list, list2;
 	LinkedList<int> lList, lList2, *lList3;
 	int *intArr;
 	int num1;
@@ -68,7 +68,7 @@ int main()
 	list.print();
 	std::cin.get();
 
-	/*LinkedList<int> *insertionTest = new LinkedList<int>();
+	LinkedList<int> *insertionTest = new LinkedList<int>();
 
 	insertionTest->insert(0, 1);
 	insertionTest->insert(1, 3);
@@ -76,6 +76,59 @@ int main()
 	insertionTest->print();
 	std::cin.get();
 
-	delete insertionTest;*/
+	insertionTest->removeAt(1);
+	insertionTest->print();
+	std::cin.get();
+	insertionTest->removeAt(1);
+	insertionTest->print();
+	std::cin.get();
+	insertionTest->removeAt(0);
+	insertionTest->print();
+	std::cin.get();
+
+	delete insertionTest;
+	
+	DynamicArray<int> *dynamicArr = new DynamicArray<int>();
+
+	dynamicArr->insert(0, 5);
+	dynamicArr->insert(1, 2);
+	dynamicArr->insert(1, 3);
+	dynamicArr->print();
+	std::cin.get();
+
+	dynamicArr->removeAt(1);
+	dynamicArr->print();
+	std::cin.get();
+	dynamicArr->removeAt(1);
+	dynamicArr->print();
+	std::cin.get();
+	dynamicArr->removeAt(0);
+	dynamicArr->print();
+	std::cin.get();
+
+	delete dynamicArr;*/
+
+	DynamicArray<int> *first = new DynamicArray<int>();
+	DynamicArray<int> *second = new DynamicArray<int>();
+	first->insert(0, 1);
+	first->insert(1, 3);
+	first->insert(2, 5);
+	first->print();
+	std::cin.get();
+
+	second->insert(0, 2);
+	second->insert(1, 4);
+	second->insert(2, 6);
+	second->print();
+	std::cin.get();
+
+	DynamicArray<int> *merged = DynamicArray<int>::merge(first, second);
+	merged->print();
+	std::cin.get();
+
+	delete first;
+	delete second;
+	delete merged;
+
 	return 0;
 }

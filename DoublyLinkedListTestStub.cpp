@@ -39,6 +39,11 @@ int main()
 	first->printListAscending();
 	second->printListAscending();
 
+	first->removeAt(3);
+	first->removeAt(1);
+	first->printListAscending();
+	
+
 	DoublyLinkedList<int> *merged = DoublyLinkedList<int>::merge(first, second);
 	merged->printListAscending();
 	std::cin.get();
