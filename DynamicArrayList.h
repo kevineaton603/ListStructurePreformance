@@ -22,6 +22,7 @@
 #define DYNAMICARRAYLIST_H_
 
 #include <iostream>
+#include "Functions.h"
 
 template<typename T>
 class DynamicArrayList
@@ -33,17 +34,22 @@ private:
 	int mLength;
 	T* mArrPtr;
 
+	void resizeArray(int newCapacity);
+
 public:
 	DynamicArrayList(int capacity = DEFAULT_CAPACITY);
 	~DynamicArrayList();
 
 	void add(T element);
 	T	 get(int index) const;
+	int  getSize() const;
+	void insert(int index, T element);
 	void print() const;
 	bool remove(T element);
 	bool removeAt(int index);
-	void resizeArray(int newCapacity);
 	bool set(int index, T element);
+	void sort();
+
 	T	 operator[](int index) const;
 
 	static DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
@@ -131,6 +137,48 @@ void DynamicArrayList<T>::add(T element)
 }
 
 template<typename T>
+T DynamicArrayList<T>::get(int index) const
+{
+	return mArrPtr[index];
+}
+
+template<typename T>
+int DynamicArrayList<T>::getSize() const
+{
+	return mLength;
+}
+
+template<typename T>
+void DynamicArrayList<T>::insert(int index, T element)
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mLength)
+	{
+		index = mLength;
+	}
+
+	if (mLength == mCapacity)
+	{
+		resizeArray(mCapacity * CAPACITY_MULTIPLIER);
+	}
+
+	++mLength;
+
+	int i;
+	for (i = mLength; i > index; --i)
+	{
+		mArrPtr[i] = mArrPtr[i - 1];
+	}
+
+	mArrPtr[index] = element;
+
+	print();
+}
+
+template<typename T>
 void DynamicArrayList<T>::print() const
 {
 	int i;
@@ -141,12 +189,6 @@ void DynamicArrayList<T>::print() const
 		std::cout << mArrPtr[i] << " ";
 	}
 	std::cout << mArrPtr[mLength - 1] << "]" << std::endl;
-}
-
-template<typename T>
-T DynamicArrayList<T>::get(int index) const
-{
-	return mArrPtr[index];
 }
 
 template<typename T>
@@ -226,6 +268,12 @@ bool DynamicArrayList<T>::set(int index, T element)
 
 	print();
 	return successful;
+}
+
+template<typename T>
+void DynamicArrayList<T>::sort()
+{
+	mergeSort(mArrPtr, 0, mLength - 1);
 }
 
 template<typename T>

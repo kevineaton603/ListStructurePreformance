@@ -28,7 +28,6 @@ template <typename T>
 class DoublyLinkedList
 {
 private:
-
 	template <typename R>
 	struct Node
 	{
@@ -70,7 +69,6 @@ private:
 	int mLength;
 
 public:
-
 	DoublyLinkedList<T>();
 	~DoublyLinkedList<T>();
 
@@ -80,6 +78,7 @@ public:
 
 	void clear();
 	void insert(T data);
+	void insert(int index, T data);
 	bool isEmpty();
 	bool isExist(T searchKey);
 	void printListAscending();
@@ -88,74 +87,7 @@ public:
 	int remove(T data);
 	T removeAt(int index);
 
-	T operator[](int index);
-
-	static DoublyLinkedList<T>* DoublyLinkedList<T>::merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second)
-	{
-		if (first == nullptr && second == nullptr)
-		{
-			return nullptr;
-		}
-		else if (first != nullptr && second == nullptr)
-		{
-			return first;
-		}
-		else if (first == nullptr && second != nullptr)
-		{
-			return second;
-		}
-		else if (second->mLength <= 0)
-		{
-			return first;
-		}
-		else if (first->mLength <= 0)
-		{
-			return second;
-		}
-		else
-		{
-			DoublyLinkedList<T> *mergedList = new DoublyLinkedList<T>();
-			Node<T> *list1CurrentNode = first->mHead;
-			Node<T> *list2CurrentNode = second->mHead;
-			int targetLength = first->mLength + second->mLength;
-
-			while (mergedList->mLength < targetLength)
-			{
-				if (list1CurrentNode == nullptr)
-				{
-					//add rest of list2 to merge list
-					while (list2CurrentNode != nullptr)
-					{
-						mergedList->prepend(list2CurrentNode->mData);
-						list2CurrentNode = list2CurrentNode->mNext;
-					}
-				}
-				else if (list2CurrentNode == nullptr)
-				{
-					//add rest of list1 to merge list
-					while (list1CurrentNode != nullptr)
-					{
-						mergedList->prepend(list1CurrentNode->mData);
-						list1CurrentNode = list1CurrentNode->mNext;
-					}
-				}
-				else if (list1CurrentNode->mData >= list2CurrentNode->mData)
-				{
-					//add list2data to merge list
-					mergedList->prepend(list2CurrentNode->mData);
-					list2CurrentNode = list2CurrentNode->mNext;
-				}
-				else if (list2CurrentNode->mData >= list1CurrentNode->mData)
-				{
-					//add list1data to merge list
-					mergedList->prepend(list1CurrentNode->mData);
-					list1CurrentNode = list1CurrentNode->mNext;
-				}
-			}
-
-			return mergedList;
-		}
-	}
+	static DoublyLinkedList<T>* merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second);
 };
 
 /* Pre:		None.
@@ -166,6 +98,16 @@ template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList() : mHead(nullptr), mTail(nullptr)
 {
 
+}
+
+/* Pre:		None.
+*  Post:	None.
+*  Purpose: To clear and delete the linked list.
+**************************************************************************************************/
+template<typename T>
+DoublyLinkedList<T>::~DoublyLinkedList()
+{
+	clear();
 }
 
 /* Pre:		None.
@@ -228,16 +170,6 @@ void DoublyLinkedList<T>::setData(int index, T data)
 
 		currentNode->mData = data;
 	}
-}
-
-/* Pre:		None.
-*  Post:	None.
-*  Purpose: To clear and delete the linked list.
-**************************************************************************************************/
-template<typename T>
-DoublyLinkedList<T>::~DoublyLinkedList()
-{
-	clear();
 }
 
 /* Pre:		None.
@@ -326,6 +258,72 @@ void DoublyLinkedList<T>::insert(T data)
 
 				nextNode = nextNode->mNext;
 			}
+		}
+	}
+}
+
+template<typename T>
+void DoublyLinkedList<T>::insert(int index, T data)
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mLength)
+	{
+		index = mLength;
+	}
+
+	Node<T> *newNode = new Node<T>(data);
+
+	if (newNode == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		if (mHead == nullptr)
+		{
+			mHead = newNode;
+			mTail = newNode;
+			++mLength;
+		}
+		else if (index == 0)
+		{
+			newNode->mNext = mHead;
+			mHead->mPrev = newNode;
+			mHead = newNode;
+			++mLength;
+		}
+		else if (index == mLength)
+		{
+			mTail->mNext = newNode;
+			newNode->mPrev = mTail;
+			mTail = newNode;
+			++mLength;
+		}
+		else
+		{
+			Node<T> *currentNode = mHead;
+			int i;
+
+			for (i = 0; i < index; ++i)
+			{
+				if (currentNode->mNext != nullptr)
+				{
+					currentNode = currentNode->mNext;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			newNode->mNext = currentNode;
+			newNode->mPrev = currentNode->mPrev;
+			currentNode->mPrev = newNode;
+			newNode->mPrev->mNext = newNode;
+			++mLength;
 		}
 	}
 }
@@ -543,14 +541,72 @@ T DoublyLinkedList<T>::removeAt(int index)
 	}
 }
 
-/* Pre:		The index at which to get the data.
-*  Post:	Returns the data at that index.
-*  Purpose: To use array-like syntax with the linked list structure.
-**************************************************************************************************/
 template<typename T>
-T DoublyLinkedList<T>::operator[](int index)
+DoublyLinkedList<T>* DoublyLinkedList<T>::merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second)
 {
-	return getData(index);
+	if (first == nullptr && second == nullptr)
+	{
+		return nullptr;
+	}
+	else if (first != nullptr && second == nullptr)
+	{
+		return first;
+	}
+	else if (first == nullptr && second != nullptr)
+	{
+		return second;
+	}
+	else if (second->mLength <= 0)
+	{
+		return first;
+	}
+	else if (first->mLength <= 0)
+	{
+		return second;
+	}
+	else
+	{
+		DoublyLinkedList<T> *mergedList = new DoublyLinkedList<T>();
+		Node<T> *list1CurrentNode = first->mHead;
+		Node<T> *list2CurrentNode = second->mHead;
+		int targetLength = first->mLength + second->mLength;
+
+		while (mergedList->mLength < targetLength)
+		{
+			if (list1CurrentNode == nullptr)
+			{
+				//add rest of list2 to merge list
+				while (list2CurrentNode != nullptr)
+				{
+					mergedList->prepend(list2CurrentNode->mData);
+					list2CurrentNode = list2CurrentNode->mNext;
+				}
+			}
+			else if (list2CurrentNode == nullptr)
+			{
+				//add rest of list1 to merge list
+				while (list1CurrentNode != nullptr)
+				{
+					mergedList->prepend(list1CurrentNode->mData);
+					list1CurrentNode = list1CurrentNode->mNext;
+				}
+			}
+			else if (list1CurrentNode->mData >= list2CurrentNode->mData)
+			{
+				//add list2data to merge list
+				mergedList->prepend(list2CurrentNode->mData);
+				list2CurrentNode = list2CurrentNode->mNext;
+			}
+			else if (list2CurrentNode->mData >= list1CurrentNode->mData)
+			{
+				//add list1data to merge list
+				mergedList->prepend(list1CurrentNode->mData);
+				list1CurrentNode = list1CurrentNode->mNext;
+			}
+		}
+
+		return mergedList;
+	}
 }
 
 #endif

@@ -1,98 +1,130 @@
-#ifndef DYNAMIC_ARR_H
-#define DYNAMIC_ARR_H
+/*
+*	Author:				Andrew Rimpici, Kevin Eaton
+*	Class:				Data Structures and Algorithms CSI-281-01
+*	Assignment:			PA5
+*	Date Assigned:		10/16/2017
+*	Due Date:			10/19/2017
+*
+*	Description:
+*		A program that tests the insertion and deletion of different data structures.
+*
+*	Certification of Authenticity:
+*		I certify that this is entirely my own work, except where I have given fully-documented
+*		references to the work of others. I understand the definition and consequences of plagiarism
+*		and acknowledge that the assessor of this assignment may, for the purpose of assessing this
+*		assignment:-Reproduce  this  assignment  and  provide  a  copy  to  another  member  of
+*		academic staff; and/or-Communicate a copy of this assignment to a plagiarism checking
+*		service (which may then retain a copy of this assignment on its database for the purpose
+*		of future plagiarism checking)
+*/
+
+#ifndef DYNAMICARRAY_H
+#define DYNAMICARRAY_H
 
 #include <iostream>
+#include "Functions.h"
 
 template<typename T>
-class DynamicArr
+class DynamicArray
 {
 private:
-	long mSize;
-	T * mArray;
-	void merge(T * list, long size);
-	T* getArray();
+	int mSize;
+	T *mArray;
+
+	void merge(T *list, int size);
+	T *getArray();
 
 public:
-	DynamicArr();
-	DynamicArr(long size);
-	~DynamicArr();
+	DynamicArray();
+	DynamicArray(int size);
+	~DynamicArray();
 
-	long getSize();
+	int getSize();
 
 	void clear();
-	void insert(const T & element);
-	void insert(T * list, long size);
-	void insert(DynamicArr<T> & list);
+	void insert(const T &element);
+	void insert(T *list, int size);
+	void insert(DynamicArray<T> &list);
 	void print();
 	void remove(T element);
-	void remove(T *list, long size);
-	void remove(DynamicArr<T> * list);
-	void removeAt(long index);
-	void removeFromTo(long lower, long upper);
+	void remove(T *list, int size);
+	void remove(DynamicArray<T> *list);
+	void removeAt(int index);
+	void removeFromTo(int lower, int upper);
+	void sort();
 
-	T DynamicArr<T>::operator[](int index);
-	
+	T	 operator[](int index);
 };
+
 template<typename T>
-DynamicArr<T>::DynamicArr()
+DynamicArray<T>::DynamicArray()
 {
 	mSize = 0;
-	mArray = NULL;
+	mArray = nullptr;
 }
+
 template<typename T>
-DynamicArr<T>::DynamicArr(long size)
+DynamicArray<T>::DynamicArray(int size)
 {
 	mSize = 0;
-	mArray = NULL;
+	mArray = nullptr;
 }
+
 template<typename T>
-DynamicArr<T>::~DynamicArr()
+DynamicArray<T>::~DynamicArray()
 {
 	clear();
 }
 
 template<typename T>
-T* DynamicArr<T>::getArray()
+T* DynamicArray<T>::getArray()
 {
-	return this->mArray;
+	return mArray;
 }
+
 template<typename T>
-long DynamicArr<T>::getSize()
+int DynamicArray<T>::getSize()
 {
 	return mSize;
 }
+
 template<typename T>
-void DynamicArr<T>::clear()
+void DynamicArray<T>::clear()
 {
 	delete[] mArray;
-	mArray = NULL;
+	mArray = nullptr;
 	mSize = 0;
 }
+
 template<typename T>
-void DynamicArr<T>::insert(const T& element)
+void DynamicArray<T>::insert(const T &element)
 {
 	int newElement = element;
-	this->merge(&newElement, 1);
+	merge(&newElement, 1);
 }
+
 template<typename T>
-void DynamicArr<T>::insert(DynamicArr<T> & list)
+void DynamicArray<T>::insert(DynamicArray<T> &list)
 {
-	this->merge(list.getArray(), list.getSize());
+	merge(list.getArray(), list.getSize());
 }
+
 template<typename T>
-void DynamicArr<T>::insert(T * list, long size)
+void DynamicArray<T>::insert(T *list, int size)
 {
-	this->merge(list, size);
+	merge(list, size);
 }
+
 template<typename T>
-void DynamicArr<T>::merge(T * list, long size)
+void DynamicArray<T>::merge(T *list, int size)
 {
-	T * newList;
+	T *newList;
 	int i, j, k;
-	if (mArray == NULL)
+	if (mArray == nullptr)
 	{
 		mSize = size;
 		mArray = new T[mSize];
+
 		for (i = 0; i < mSize; i++)
 		{
 			mArray[i] = list[i];
@@ -102,6 +134,7 @@ void DynamicArr<T>::merge(T * list, long size)
 	{
 		newList = new T[mSize + size];
 		i = j = k = 0;
+
 		while (i < mSize && j < size)
 		{
 			if (mArray[i] <= list[j])
@@ -117,28 +150,34 @@ void DynamicArr<T>::merge(T * list, long size)
 				k++;
 			}
 		}
+
 		while (i < mSize)
 		{
 			newList[k] = mArray[i];
 			i++;
 			k++;
 		}
+
 		while (j < size)
 		{
 			newList[k] = list[j];
 			j++;
 			k++;
 		}
+
 		delete[] mArray;
 		mArray = newList;
 		mSize += size;
 	}
 }
+
 template<typename T>
-void DynamicArr<T>::print()
+void DynamicArray<T>::print()
 {
-	if (mArray == NULL)
+	if (mArray == nullptr)
+	{
 		std::cout << "Array is empty" << std::endl;
+	}
 	else
 	{
 		for (long i = 0; i < mSize; i++)
@@ -151,17 +190,20 @@ void DynamicArr<T>::print()
 		}
 	}
 }
+
 template<typename T>
-void DynamicArr<T>::remove(T element)
+void DynamicArray<T>::remove(T element)
 {
 	remove(&element, 1);
 }
+
 template<typename T>
-void DynamicArr<T>::remove(T * list, long size)
+void DynamicArray<T>::remove(T *list, int size)
 {
-	T * newList;
-	long i, j, k, newSize;
-	if (this->mArray == NULL)
+	T *newList;
+	int i, j, k, newSize;
+	
+	if (mArray == nullptr)
 	{
 		std::cout << "There are no elements in this array\n\n";
 	}
@@ -170,7 +212,7 @@ void DynamicArr<T>::remove(T * list, long size)
 		i = j = k = 0;
 		newSize = mSize;
 
-		while (i < this->mSize && j < size && newSize <= 0)
+		while (i < mSize && j < size && newSize <= 0)
 		{
 			if (mArray[i] == list[j])
 			{
@@ -186,6 +228,7 @@ void DynamicArr<T>::remove(T * list, long size)
 				j++;
 			}
 		}
+
 		if (newSize == mSize)
 		{
 			std::cout << "No changes were made to the Array!\n\n";
@@ -198,6 +241,7 @@ void DynamicArr<T>::remove(T * list, long size)
 		{
 			newList = new T[newSize];
 			i = j = k = 0;
+
 			while (i < this->mSize && j < size)
 			{
 				if (mArray[i] > list[j])
@@ -218,96 +262,35 @@ void DynamicArr<T>::remove(T * list, long size)
 		}
 	}
 }
+
 template<typename T>
-void DynamicArr<T>::remove(DynamicArr<T> * list)
+void DynamicArray<T>::remove(DynamicArray<T> *list)
 {
 	remove(list->getArray(), list->mSize);
 }
-template<typename T>
-void DynamicArr<T>::removeAt(long index)
-{
 
-}
 template<typename T>
-void DynamicArr<T>::removeFromTo(long lower, long upper)
+void DynamicArray<T>::removeAt(int index)
 {
-
+	//Rip needs to be finished
 }
+
+template<typename T>
+void DynamicArray<T>::removeFromTo(int lower, int upper)
+{
+	//Rip needs to be finished
+}
+
+template<typename T>
+void DynamicArray<T>::sort()
+{
+	mergeSort(mArray, 0, mSize - 1);
+}
+
 template <typename T>
-T DynamicArr<T>::operator[](int index)
+T DynamicArray<T>::operator[](int index)
 {
 	return mArray[index];
 }
 
-/* Pre:		T array, lowerbound and upperbound
-*  Post:	sorts using merge method
-*  Purpose: sorts using merge method
-*  NOTE: for upperbound send in size - 1
-*****************************************************************************/
-template <typename T>
-static void merge(T * list, long lowerBound, long mid, long upperBound)
-{
-	long size1 = mid - lowerBound + 1;
-	long size2 = upperBound - mid;
-	T * left = new T[size1];
-	T * right = new T[size2];
-	long i, j, k;
-
-	for (i = 0; i < size1; i++)
-	{
-		left[i] = list[lowerBound + i];
-	}
-	for (j = 0; j < size2; j++)
-	{
-		right[j] = list[mid + 1 + j];
-	}
-	i = j = 0;
-	k = lowerBound;
-	while (i < size1 && j < size2)
-	{
-		if (left[i] <= right[j])
-		{
-			list[k] = left[i];
-			i++;
-		}
-		else
-		{
-			list[k] = right[j];
-			j++;
-		}
-		k++;
-	}
-	while (i < size1)
-	{
-		list[k] = left[i];
-		i++;
-		k++;
-	}
-	while (j < size2)
-	{
-		list[k] = right[j];
-		j++;
-		k++;
-	}
-	delete[] left;
-	delete[] right;
-}
-/* Pre:		T array, lowerbound and upperbound
-*  Post:	sorts using merge method
-*  Purpose: sorts using merge method
-*  NOTE: for upperbound send in size - 1
-*****************************************************************************/
-template <typename T>
-static void mergeSort(T * list, long lowerBound, long upperBound)
-{
-	long mid;
-	if (lowerBound < upperBound)
-	{
-		mid = (lowerBound + upperBound) / 2;
-		mergeSort(list, lowerBound, mid);
-		mergeSort(list, mid + 1, upperBound);
-		merge(list, lowerBound, mid, upperBound);
-	}
-}
-#endif // !DYNAMIC_ARR_H
-
+#endif

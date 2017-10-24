@@ -23,10 +23,10 @@
 int main()
 {
 	DoublyLinkedList<int> *first = new DoublyLinkedList<int>();
-	first->insert(5);
-	first->insert(6);
-	first->insert(8);
-	first->insert(9);
+	first->insert(0, 5);
+	first->insert(1, 6);
+	first->insert(2, 8);
+	first->insert(3, 9);
 
 	DoublyLinkedList<int> *second = new DoublyLinkedList<int>();
 	second->insert(3);

@@ -18,16 +18,16 @@
 *		of future plagiarism checking)
 */
 
-#include <iostream>
-#include"DynamicArray.h"
-#include"LinkedList.h"
-#include<ctime>
+/*#include <iostream>
+#include "DynamicArray.h"
+#include "LinkedList.h"
+#include <ctime>
 
-/*int main()
+int main()
 {
-	DynamicArr<int> list, list2;
+	DynamicArray<int> list, list2;
 	LinkedList<int> lList, lList2, *lList3;
-	int * intArr;
+	int *intArr;
 	int num1;
 	intArr = new int[10];
 	srand(unsigned(time(NULL)));
@@ -60,5 +60,9 @@
 	lList.removeAt(9);
 	lList.print();
 	delete[] intArr;
+
+	list.insert(5);
+
+	std::cin.get();
 	return 0;
 }*/

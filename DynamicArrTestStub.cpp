@@ -53,12 +53,13 @@ int main()
 	std::cin.get();
 
 	DynamicArrayList<int> *first = new DynamicArrayList<int>();
-	first->add(5);
-	first->add(6);
-	first->add(8);
-	first->add(9);
+	first->insert(0, 5);
+	first->insert(1, 6);
+	first->insert(2, 8);
+	first->insert(3, 9);
 	std::cin.get();
-
+	first->sort();
+		
 	DynamicArrayList<int> *second = new DynamicArrayList<int>();
 	second->add(3);
 	second->add(5);
