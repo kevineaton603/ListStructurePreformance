@@ -2,8 +2,8 @@
 *	Author:				Andrew Rimpici, Kevin Eaton
 *	Class:				Data Structures and Algorithms CSI-281-01
 *	Assignment:			PA5
-*	Date Assigned:		10/16/2017
-*	Due Date:			10/19/2017
+*	Date Assigned:		10/19/2017
+*	Due Date:			10/26/2017
 *
 *	Description:
 *		A program that tests the insertion and deletion of different data structures.
@@ -18,109 +18,229 @@
 *		of future plagiarism checking)
 */
 
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
 #include <iostream>
+#include <string>
 
-template<typename T>
+template <typename T>
 class LinkedList
 {
 private:
-	template<typename R>
+	template <typename R>
 	struct Node
 	{
 		Node<R> *mNext;
 		R mData;
 		
-		Node()
+		/*
+		 * Pre: None.
+		 * Post: Creates a new node.
+		 * Purpose: To create a new node object.
+		 * Author: Kevin Eaton
+		 */
+		Node<R>()
 		{
 			mNext = nullptr;
 		}
 
-		Node(R data)
+		/*
+		* Pre: Data for the node.
+		* Post: Creates a new node.
+		* Purpose: To create a new node object.
+		* Author: Kevin Eaton
+		*/
+		Node<R>(R data)
 		{
 			mNext = nullptr;
 			mData = data;
 		}
 
-		~Node()
+		/*
+		* Pre: None.
+		* Post: Destroys a node object.
+		* Purpose: To destroy the node and free the memory.
+		* Author: Kevin Eaton
+		*/
+		~Node<R>()
 		{
 			mNext = nullptr;
 		}
 	};
 
 	Node<T> *mHead, *mTail;
-	int mCount;
+	int mLength;
 
 public:
+
+	/*
+	* Pre: None.
+	* Post: Returns a LinkedList object.
+	* Purpose: Creates a LinkedList object.
+	* Author: Kevin Eaton
+	*/
 	LinkedList();
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Destroys a LinkedList object.
+	* Author: Kevin Eaton
+	*/
 	~LinkedList();
 	
-	void append(const T &data);
-	void clear();
+	/*
+	* Pre: The data to append to the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the beginning of the list.
+	* Author: Andrew Rimpici
+	*/
+	void append(T data);
+
+	/*
+	* Pre: The data to prepend to the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the end of the list.
+	* Author: Andrew Rimpici
+	*/
+	void prepend(T data);
+
+	/*
+	* Pre: The data to insert into the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the list in ascending order.
+	* Author: Andrew Rimpici
+	*/
 	void insert(T data);
+
+	/*
+	* Pre: The index and data to insert into the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the list at the specified index.
+	* Author: Andrew Rimpici
+	*/
 	void insert(int index, T data);
-	bool isExist(T data);
-	bool isEmpty();
-	void print();
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Deletes all of the nodes from the list.
+	* Author: Kevin Eaton
+	*/
+	void clear();
+
+	/*
+	* Pre: The index to remove at.
+	* Post: None.
+	* Purpose: Deletes the node at the specified index
+	* Author: Kevin Eaton
+	*/
 	void removeAt(int index);
+
+	/*
+	* Pre: None.
+	* Post: Returns true if list is empty and false otherwise.
+	* Purpose: Checks if the list is empty.
+	* Author: Kevin Eaton
+	*/
+	bool isEmpty();
+
+	/*
+	* Pre: None.
+	* Post: Returns the number of nodes in the list.
+	* Purpose: To get the length of the list.
+	* Author: Andrew Rimpici
+	*/
+	int getLength();
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Prints out the list to the console.
+	* Author: Kevin Eaton
+	*/
+	void print() const;
+
+	/*
+	* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+	* Post: Returns true if searchkey is in the list and false otherwise.
+	* Purpose: To check if searchkey is in the list.
+	* Author: Andrew Rimpici
+	*/
+	bool sequentialSearch(T searchKey, bool isSorted);
 	
-	static LinkedList<T>* merge(LinkedList<T> &list1, LinkedList<T> &list2);
+	/*
+	* Pre: Two lists to merge together.
+	* Post: None.
+	* Purpose: Merges the two lists together.
+	* Author: Kevin Eaton
+	*/
+	static void merge(LinkedList<T> &list1, LinkedList<T> &list2, LinkedList<T> &destination);
 };
 
-template<typename T>
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Creates a LinkedList object.
+* Author: Kevin Eaton
+*/
+template <typename T>
 LinkedList<T>::LinkedList()
 {
 	mHead = nullptr;
 	mTail = nullptr;
-	mCount = 0;
+	mLength = 0;
 }
 
-template<typename T>
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Destroys a LinkedList object.
+* Author: Kevin Eaton
+*/
+template <typename T>
 LinkedList<T>::~LinkedList()
 {
 	clear();
 }
 
-template<typename T>
-void LinkedList<T>::append(const T &data)
-{
-	Node<T> *newNode = new Node<T>(data);
-	if (mHead == nullptr)
-	{
-		mHead = newNode;
-		mTail = newNode;
-	}
-	else
-	{
-		mTail->mNext = newNode;
-		mTail = newNode;
-	}
 
-	mCount++;
+/*
+* Pre: The data to append to the linked list.
+* Post: None.
+* Purpose: Adds the data to the end of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void LinkedList<T>::append(T data)
+{
+	insert(mLength, data);
 }
 
-template<typename T>
-void LinkedList<T>::clear()
+
+/*
+* Pre: The data to prepend to the linked list.
+* Post: None.
+* Purpose: Adds the data to the beginning of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void LinkedList<T>::prepend(T data)
 {
-	Node<T> *tmp, *toBeDeleted;
-	tmp = mHead;
-
-	while (tmp != nullptr)
-	{
-		toBeDeleted = tmp;
-		tmp = tmp->mNext;
-		toBeDeleted->mNext = nullptr;
-		delete toBeDeleted;
-	}
-
-	mHead = nullptr;
-	mTail = nullptr;
-	mCount = 0;
+	insert(0, data);
 }
 
-template<typename T>
+
+/*
+* Pre: The data to insert into the linked list.
+* Post: None.
+* Purpose: Adds the data to the list in ascending order.
+* Author: Andrew Rimpici
+*/
+template <typename T>
 void LinkedList<T>::insert(T data)
 {
 	Node<T> *newNode = new Node<T>(data);
@@ -145,10 +265,11 @@ void LinkedList<T>::insert(T data)
 		mTail->mNext = newNode;
 		mTail = newNode;
 	}
-	else 
+	else
 	{
 		tmp = mHead;
 		oneBefore = mHead;
+
 		while (tmp != nullptr && tmp->mData < data)
 		{
 			oneBefore = tmp;
@@ -159,25 +280,26 @@ void LinkedList<T>::insert(T data)
 		oneBefore->mNext = newNode;
 	}
 
-	mCount++;
+	mLength++;
 }
 
+
 /*
- * Pre:
- * Post:
- * Purpose:
- * Author: Andrew Rimpici
+* Pre: The index and data to insert into the linked list.
+* Post: None.
+* Purpose: Adds the data to the list at the specified index.
+* Author: Andrew Rimpici
 */
-template<typename T>
+template <typename T>
 void LinkedList<T>::insert(int index, T data)
 {
 	if (index < 0)
 	{
 		index = 0;
 	}
-	else if (index > mCount)
+	else if (index > mLength)
 	{
-		index = mCount;
+		index = mLength;
 	}
 
 	Node<T> *newNode = new Node<T>(data);
@@ -198,7 +320,7 @@ void LinkedList<T>::insert(int index, T data)
 			newNode->mNext = mHead;
 			mHead = newNode;
 		}
-		else if (index == mCount)
+		else if (index == mLength)
 		{
 			mTail->mNext = newNode;
 			mTail = newNode;
@@ -226,59 +348,44 @@ void LinkedList<T>::insert(int index, T data)
 			previousNode->mNext = newNode;
 		}
 
-		++mCount;
+		++mLength;
 	}
 }
 
-template<typename T>
-bool LinkedList<T>::isExist(T data)
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Deletes all of the nodes from the list.
+* Author: Kevin Eaton
+*/
+template <typename T>
+void LinkedList<T>::clear()
 {
-	Node<T> *tmp;
-	if (mHead == nullptr)
-	{
-		return false;
-	}
-	
+	Node<T> *tmp, *toBeDeleted;
 	tmp = mHead;
+
 	while (tmp != nullptr)
 	{
-		if (tmp->mData == data)
-		{
-			return true;
-		}
-
+		toBeDeleted = tmp;
 		tmp = tmp->mNext;
+		toBeDeleted->mNext = nullptr;
+		delete toBeDeleted;
 	}
 
-	return false;
+	mHead = nullptr;
+	mTail = nullptr;
+	mLength = 0;
 }
 
-template<typename T>
-bool LinkedList<T>::isEmpty()
-{
-	return mHead == nullptr;
-}
 
-template<typename T>
-void LinkedList<T>::print()
-{
-	Node<T> *tmp;
-	int i = 0; 
-	
-	if (!this->isEmpty())
-	{
-		tmp = mHead;
-		
-		while (tmp != nullptr)
-		{
-			std::cout << i << ": " <<tmp->mData << std::endl;
-			tmp = tmp->mNext;
-			i++;
-		}
-	}
-}
-
-template<typename T>
+/*
+* Pre: The index to remove at.
+* Post: None.
+* Purpose: Deletes the node at the specified index
+* Author: Kevin Eaton
+*/
+template <typename T>
 void LinkedList<T>::removeAt(int index)
 {
 	Node<T> *tmp, *oneBefore;
@@ -287,85 +394,171 @@ void LinkedList<T>::removeAt(int index)
 
 	tmp = mHead->mNext;
 	oneBefore = mHead;
-	
-	if (index < 0 || index >= mCount)
+
+	if (index < 0 || index >= mLength)
 	{
 		return;
 	}
 	else if (mHead != nullptr)
 	{
-		tmp = mHead; 
-		oneBefore = mHead; 
+		tmp = mHead;
+		oneBefore = mHead;
 
 		for (i = 0; i < index; i++)
-		{ 
-			oneBefore = tmp; 
-			tmp = tmp->mNext; 
+		{
+			oneBefore = tmp;
+			tmp = tmp->mNext;
 		}
-		
+
 		if (index == 0)
 		{
 			mHead = tmp->mNext;
-		}	
+		}
 		else
 		{
 			oneBefore->mNext = tmp->mNext;
 		}
 
 		delete tmp;
-		mCount--;
+		mLength--;
 	}
 }
 
-template<typename T>
-LinkedList<T>* LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2)
-{
-	Node<T> *tmp, *tmp2;
-	LinkedList<T> *newList = new LinkedList<T>();
 
-	if (list1.mHead != nullptr && list2.mHead != nullptr)
+/*
+* Pre: None.
+* Post: Returns true if list is empty and false otherwise.
+* Purpose: Checks if the list is empty.
+* Author: Kevin Eaton
+*/
+template <typename T>
+bool LinkedList<T>::isEmpty()
+{
+	return mHead == nullptr;
+}
+
+
+/*
+* Pre: None.
+* Post: Returns the number of nodes in the list.
+* Purpose: To get the length of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+int LinkedList<T>::getLength()
+{
+	return mLength;
+}
+
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Prints out the list to the console.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void LinkedList<T>::print() const
+{
+	Node<T> *currentNode = mHead;
+
+	std::cout << "Linked List has " << std::to_string(mLength) << " elements: ";
+
+	if (currentNode == nullptr)
 	{
-		if (list1.mHead != nullptr && list2.mHead == nullptr)
+		std::cout << std::endl;
+		return;
+	}
+
+	while (currentNode->mNext != nullptr)
+	{
+		std::cout << currentNode->mData << " ";
+		currentNode = currentNode->mNext;
+	}
+
+	std::cout << currentNode->mData << " " << std::endl;
+}
+
+
+/*
+* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+* Post: Returns true if searchkey is in the list and false otherwise.
+* Purpose: To check if searchkey is in the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+bool LinkedList<T>::sequentialSearch(T searchKey, bool isSorted)
+{
+	Node<T> *currentNode = mHead;
+	T currentElement;
+	bool isFound = false;
+
+	while (currentNode != nullptr)
+	{
+		currentElement = currentNode->mData;
+
+		if (currentElement == searchKey)
 		{
-			newList = &list1;
+			isFound = true;
+			break;
 		}
-		else if (list1.mHead == nullptr && list2.mHead != nullptr)
+		else if (isSorted && searchKey < currentElement)
 		{
-			newList = &list2;
+			break;
 		}
 		else
 		{
-			tmp = list1.mHead;
-			tmp2 = list2.mHead;
-			while (tmp != nullptr && tmp2 != nullptr)
-			{
-				if (tmp->mData <= tmp2->mData)
-				{
-					newList->append(tmp->mData);
-					tmp = tmp->mNext;
-				}
-				else
-				{
-					newList->append(tmp2->mData);
-					tmp2 = tmp2->mNext;
-				}
-			}
-
-			while (tmp != nullptr)
-			{
-				newList->append(tmp->mData);
-				tmp = tmp->mNext;
-			}
-
-			while (tmp2 != nullptr)
-			{
-				newList->append(tmp2->mData);
-				tmp2 = tmp2->mNext;
-			}
+			currentNode = currentNode->mNext;
 		}
 	}
 
-	return newList;
+	return isFound;
 }
+
+
+/*
+* Pre: Two lists to merge together. **Both lists must be in ascending order.**
+* Post: Returns a new linked list.
+* Purpose: Merges the two lists together.
+* Author: Kevin Eaton
+*/
+template <typename T>
+void LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2, LinkedList<T> &destination)
+{
+	Node<T> *tmp, *tmp2;
+
+	if (list1.mLength > 0 && list2.mLength > 0)
+	{
+		tmp = list1.mHead;
+		tmp2 = list2.mHead;
+
+		while (tmp != nullptr && tmp2 != nullptr)
+		{
+			if (tmp->mData <= tmp2->mData)
+			{
+				destination.append(tmp->mData);
+				tmp = tmp->mNext;
+			}
+			else
+			{
+				destination.append(tmp2->mData);
+				tmp2 = tmp2->mNext;
+			}
+		}
+
+		while (tmp != nullptr)
+		{
+			destination.append(tmp->mData);
+			tmp = tmp->mNext;
+		}
+
+		while (tmp2 != nullptr)
+		{
+			destination.append(tmp2->mData);
+			tmp2 = tmp2->mNext;
+		}
+	}
+}
+
 #endif
 

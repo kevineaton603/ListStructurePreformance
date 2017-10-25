@@ -19,116 +19,73 @@
 */
 
 #include <iostream>
-#include "DynamicArray.h"
-#include "LinkedList.h"
+#include <fstream>
 #include <ctime>
 
-int main()
-{
-	/*DynamicArray<int> list, list2;
-	LinkedList<int> lList, lList2, *lList3;
-	int *intArr;
-	int num1;
-	intArr = new int[10];
-	srand(unsigned(time(NULL)));
-	for (int i = 10; i > 0; i--)
-	{
-		num1 = rand() % 1000;
-		std::cout << num1 << std::endl;
-		lList.insert(num1);
+#include "DynamicArray.h"
+#include "DynamicArrayList.h"
+#include "LinkedList.h"
+#include "DoublyLinkedList.h"
 
-	}
-	lList.print();
-	std::cout << "Int Array\n\n";
-	for (int i = 0; i < 10; i++)
-	{
-		intArr[i] = rand() % 1000;
-		std::cout << i << ": " << intArr[i] << std::endl;
-		lList2.insert(intArr[i]);
-	}
+//int main()
+//{
+	/* What are we testing?
+	 * We are testing difference between Linked Lists, Doubly Linked Lists, Dynamic Arrays, and Dynamic ArrayLists for
+	 * insertion (Three tests: Front, Back, In Order) 
+	 * deletion (Three tests: Front, Back, Middle)
+	 * merging (One Test: Merging two ordered lists)
+	 * searching (Two Tests Sequential Search: Sorted, Unsorted)
+	 *
+	 * The above test will be run three times and all of the results will be recorded to a file.
+	 * Insertion Total of 3 * 4 * 3 = 36 Tests
+	 * Deletion Total of 3 * 4 * 3 = 36 Tests
+	 * Merging Total of 1 * 4 * 3 = 12 Tests
+	 * Searching Total of 2 * 4 * 3 = 24 Tests
+	 * Total of 108 tests. 16 Appendix Charts and 4 extra Charts for Average Charts.
+	 */
 
-	std::cout << "List: \n\n";
-	lList.print();
+	/*DoublyLinkedList<int> *second = new DoublyLinkedList<int>();
+	second->insert(0, 3);
+	second->insert(0, 6);
+	second->insert(0, 7);
+	second->insert(0, 9);
+	second->insert(0, 10);
+	second->insert(0, 11);
 
-	std::cout << "List2: \n\n";
-	lList2.print();
+	std::cout << "Found = " << second->sequentialSearch(3, false);
+	std::cin.get();
 
-	std::cout << std::endl;
-	lList3 = LinkedList<int>::merge(lList, lList2);
-	lList3->print();
-	std::cout << std::endl;
-	lList.removeAt(9);
-	lList.print();
-	delete[] intArr;
-	delete lList3;
+	DynamicArrayList<int> *first = new DynamicArrayList<int>();
+	first->insert(5);
+	first->insert(0);
+	first->insert(-1);
+	first->insert(9);
 
-	list.insert(0, 5);
-	list.insert(1, 1);
-	list.insert(1, 2); 
-	list.print();
+	std::cout << "Found = " << first->sequentialSearch(9, false);
 	std::cin.get();
 
 	LinkedList<int> *insertionTest = new LinkedList<int>();
-
 	insertionTest->insert(0, 1);
 	insertionTest->insert(1, 3);
-	insertionTest->insert(1, 5);
+	insertionTest->insert(3, 5);
 	insertionTest->print();
+
+	std::cout << "Found = " << insertionTest->sequentialSearch(4, true);
 	std::cin.get();
 
-	insertionTest->removeAt(1);
-	insertionTest->print();
-	std::cin.get();
-	insertionTest->removeAt(1);
-	insertionTest->print();
-	std::cin.get();
-	insertionTest->removeAt(0);
-	insertionTest->print();
-	std::cin.get();
-
-	delete insertionTest;
-	
 	DynamicArray<int> *dynamicArr = new DynamicArray<int>();
-
 	dynamicArr->insert(0, 5);
-	dynamicArr->insert(1, 2);
+	dynamicArr->insert(0, 2);
 	dynamicArr->insert(1, 3);
 	dynamicArr->print();
+
+	std::cout << "Found = " << dynamicArr->sequentialSearch(3, true);
 	std::cin.get();
 
-	dynamicArr->removeAt(1);
-	dynamicArr->print();
-	std::cin.get();
-	dynamicArr->removeAt(1);
-	dynamicArr->print();
-	std::cin.get();
-	dynamicArr->removeAt(0);
-	dynamicArr->print();
-	std::cin.get();
-
-	delete dynamicArr;*/
-
-	DynamicArray<int> *first = new DynamicArray<int>();
-	DynamicArray<int> *second = new DynamicArray<int>();
-	first->insert(0, 1);
-	first->insert(1, 3);
-	first->insert(2, 5);
-	first->print();
-	std::cin.get();
-
-	second->insert(0, 2);
-	second->insert(1, 4);
-	second->insert(2, 6);
-	second->print();
-	std::cin.get();
-
-	DynamicArray<int> *merged = DynamicArray<int>::merge(first, second);
-	merged->print();
-	std::cin.get();
-
-	delete first;
 	delete second;
-	delete merged;
+	delete first;
+	delete insertionTest;
+	delete dynamicArr;
 
 	return 0;
-}
+}*/

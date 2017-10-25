@@ -2,8 +2,8 @@
 *	Author:				Andrew Rimpici, Kevin Eaton
 *	Class:				Data Structures and Algorithms CSI-281-01
 *	Assignment:			PA5
-*	Date Assigned:		10/16/2017
-*	Due Date:			10/19/2017
+*	Date Assigned:		10/19/2017
+*	Due Date:			10/26/2017
 *
 *	Description:
 *		A program that tests the insertion and deletion of different data structures.
@@ -35,28 +35,34 @@ private:
 		Node<T> *mNext;
 		Node<T> *mPrev;
 
-		/* Pre:		None.
-		*  Post:	Creates a new node object.
-		*  Purpose: To create a new node that holds data in the linked list.
-		**************************************************************************************************/
+		/*
+		* Pre: None.
+		* Post: Creates a new node.
+		* Purpose: To create a new node object.
+		* Author: Andrew Rimpici
+		*/
 		Node<R>() : mData(R()), mNext(nullptr), mPrev(nullptr)
 		{
 
 		}
 
-		/* Pre:		A piece of data for the node to hold.
-		*  Post:	Creates a new node object.
-		*  Purpose: To create a new node that holds data in the linked list.
-		**************************************************************************************************/
+		/*
+		* Pre: The data for the node.
+		* Post: Creates a new node.
+		* Purpose: To create a new node object.
+		* Author: Andrew Rimpici
+		*/
 		Node<R>(R data) : mData(data), mNext(nullptr), mPrev(nullptr)
 		{
 
 		}
 
-		/* Pre:		None.
-		*  Post:	None.
-		*  Purpose: Deletes the node and sets its pointers to null.
-		**************************************************************************************************/
+		/*
+		* Pre: None.
+		* Post: Destroys a node object.
+		* Purpose: To destroy the node and free the memory.
+		* Author: Andrew
+		*/
 		~Node<R>()
 		{
 			mNext = nullptr;
@@ -69,162 +75,184 @@ private:
 	int mLength;
 
 public:
+
+	/*
+	* Pre: None.
+	* Post: Returns a DoublyLinkedList object.
+	* Purpose: Creates a DoublyLinkedList object.
+	* Author: Andrew Rimpici
+	*/
 	DoublyLinkedList<T>();
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Destroys a DoublyLinkedList object.
+	* Author: Andrew Rimpici
+	*/
 	~DoublyLinkedList<T>();
 
-	int getLength() const;
-	T getData(int index) const;
-	void setData(int index, T data);
+	/*
+	* Pre: The data to append to the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the end of the list.
+	* Author: Andrew Rimpici
+	*/
+	void append(T data);
 
-	void clear();
-	DoublyLinkedList<T>* copy();
-	void insert(T data);
-	void insert(int index, T data);
-	bool isEmpty();
-	bool isExist(T searchKey);
+	/*
+	* Pre: The data to prepend to the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the beginning of the list.
+	* Author: Andrew Rimpici
+	*/
 	void prepend(T data);
-	void printListAscending();
-	void printListDescending();
-	int  removeAll(T data);
+
+	/*
+	* Pre: The data to insert into the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the list in ascending order.
+	* Author: Andrew Rimpici
+	*/
+	void insert(T data);
+
+	/*
+	* Pre: The index and data to insert into the linked list.
+	* Post: None.
+	* Purpose: Adds the data to the list at the specified index.
+	* Author: Andrew Rimpici
+	*/
+	void insert(int index, T data);
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Deletes all of the nodes from the list.
+	* Author: Andrew Rimpici
+	*/
+	void clear();
+
+	/*
+	* Pre: The index to remove at.
+	* Post: None.
+	* Purpose: Deletes the node at the specified index
+	* Author: Andrew Rimpici
+	*/
 	T	 removeAt(int index);
 
-	static DoublyLinkedList<T>* merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second);
+	/*
+	* Pre: None.
+	* Post: Returns true if list is empty and false otherwise.
+	* Purpose: Checks if the list is empty.
+	* Author: Andrew Rimpici
+	*/
+	bool isEmpty();
+
+	/*
+	* Pre: None.
+	* Post: Returns the number of nodes in the list.
+	* Purpose: To get the length of the list.
+	* Author: Andrew Rimpici
+	*/
+	int getLength() const;
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Prints out the list to the console.
+	* Author: Andrew Rimpici
+	*/
+	void print() const;
+
+	/*
+	* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+	* Post: Returns true if searchkey is in the list and false otherwise.
+	* Purpose: To check if searchkey is in the list.
+	* Author: Andrew Rimpici
+	*/
+	bool sequentialSearch(T searchKey, bool isSorted);
+
+	/*
+	* Pre: Two lists to merge together.
+	* Post: None.
+	* Purpose: Merges the two lists together.
+	* Author: Andrew Rimpici
+	*/
+	static void merge(DoublyLinkedList<T> &first, DoublyLinkedList<T> &second, DoublyLinkedList<T> &destination);
+
+
+	//Not sure if i need these come back to this.
+	/*
+	* Pre: None.
+	* Post: A new DoublyLinkedList.
+	* Purpose: To copy a linked list into a new one.
+	* Author: Andrew Rimpici
+	*/
+	DoublyLinkedList<T>* copy();
+	T getData(int index) const;
+	void setData(int index, T data);
+	int  removeAll(T data);
 };
 
-/* Pre:		None.
-*  Post:	Creates a new linked list object.
-*  Purpose: To create a new linked list object.
-**************************************************************************************************/
+
+/*
+* Pre: None.
+* Post: Returns a DoublyLinkedList object.
+* Purpose: Creates a DoublyLinkedList object.
+* Author: Andrew Rimpici
+*/
 template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList() : mHead(nullptr), mTail(nullptr)
 {
 
 }
 
-/* Pre:		None.
-*  Post:	None.
-*  Purpose: To clear and delete the linked list.
-**************************************************************************************************/
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Destroys a DoublyLinkedList object.
+* Author: Andrew Rimpici
+*/
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList()
 {
 	clear();
 }
 
-/* Pre:		None.
-*  Post:	Returns the length of the list.
-*  Purpose: To get how big the list is.
-**************************************************************************************************/
+
+/*
+* Pre: The data to append to the linked list.
+* Post: None.
+* Purpose: Adds the data to the end of the list.
+* Author: Andrew Rimpici
+*/
 template<typename T>
-int DoublyLinkedList<T>::getLength() const
+void DoublyLinkedList<T>::append(T data)
 {
-	return mLength;
+	insert(mLength, data);
 }
 
-/* Pre:		The index to get the data from.
-*  Post:	Returns the data at the index in the list.
-*  Purpose: To get the data at the specific index.
-**************************************************************************************************/
+
+/*
+* Pre: The data to prepend to the linked list.
+* Post: None.
+* Purpose: Adds the data to the beginning of the list.
+* Author: Andrew Rimpici
+*/
 template<typename T>
-T DoublyLinkedList<T>::getData(int index) const
+void DoublyLinkedList<T>::prepend(T data)
 {
-	int i;
-	Node<T> *currentNode;
-
-	if (index < 0 || index >= mLength)
-	{
-		return T();
-	}
-	else
-	{
-		currentNode = mHead;
-		for (i = 0; i < index; ++i)
-		{
-			currentNode = currentNode->mNext;
-		}
-
-		return currentNode->mData;
-	}
+	insert(0, data);
 }
 
-/* Pre:		The index and the data to set the index with.
-*  Post:	Sets the current index to the data.
-*  Purpose: To set a node's data at a specific index.
-**************************************************************************************************/
-template<typename T>
-void DoublyLinkedList<T>::setData(int index, T data)
-{
-	int i;
-	Node<T> *currentNode;
 
-	if (index < 0 || index >= mLength)
-	{
-		return;
-	}
-	else
-	{
-		currentNode = mHead;
-		for (i = 0; i < index; ++i)
-		{
-			currentNode = currentNode->mNext;
-		}
-
-		currentNode->mData = data;
-	}
-}
-
-/* Pre:		None.
-*  Post:	None.
-*  Purpose: To clear and delete the list of all its nodes.
-**************************************************************************************************/
-template<typename T>
-void DoublyLinkedList<T>::clear()
-{
-	//List is already empty.
-	if (mHead == nullptr)
-	{
-		return;
-	}
-
-	//While the element after head is not null.
-	while (mHead->mNext != nullptr)
-	{
-		mHead = mHead->mNext;
-		delete mHead->mPrev;
-		mHead->mPrev = nullptr;
-		--mLength;
-	}
-
-	//If there is only one element left in the list.
-	if (mHead == mTail)
-	{
-		delete mHead;
-		--mLength;
-	}
-
-	mHead = nullptr;
-	mTail = nullptr;
-}
-
-template<typename T>
-DoublyLinkedList<T>* DoublyLinkedList<T>::copy()
-{
-	DoublyLinkedList<T> *another = new DoublyLinkedList<T>();
-	Node<T> *currentNode = mHead;
-
-	for (int i = 0; i < mLength; ++i)
-	{
-		another->insert(currentNode->mData);
-		currentNode = currentNode->mNext;
-	}
-
-	return another;
-}
-
-/* Pre:		Data to insert into the list.
-*  Post:	None.
-*  Purpose: To insert new data into the list.
-**************************************************************************************************/
+/*
+* Pre: The data to insert into the linked list.
+* Post: None.
+* Purpose: Adds the data to the list in ascending order.
+* Author: Andrew Rimpici
+*/
 template<typename T>
 void DoublyLinkedList<T>::insert(T data)
 {
@@ -278,6 +306,13 @@ void DoublyLinkedList<T>::insert(T data)
 	}
 }
 
+
+/*
+* Pre: The index and data to insert into the linked list.
+* Post: None.
+* Purpose: Adds the data to the list at the specified index.
+* Author: Andrew Rimpici
+*/
 template<typename T>
 void DoublyLinkedList<T>::insert(int index, T data)
 {
@@ -342,168 +377,49 @@ void DoublyLinkedList<T>::insert(int index, T data)
 	}
 }
 
-/* Pre:		None.
-*  Post:	Returns if the list is empty.
-*  Purpose: To determine if the list is holding any nodes.
-**************************************************************************************************/
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Deletes all of the nodes from the list.
+* Author: Andrew Rimpici
+*/
 template<typename T>
-bool DoublyLinkedList<T>::isEmpty()
+void DoublyLinkedList<T>::clear()
 {
-	return mHead == nullptr;
-}
-
-/* Pre:		Data to see if it is in the list.
-*  Post:	A bool if the data was found in the list.
-*  Purpose: To see if the data is in the list.
-**************************************************************************************************/
-template<typename T>
-bool DoublyLinkedList<T>::isExist(T searchKey)
-{
-	bool found = false;
-	Node<T> *currentNode = mHead;
-
-	while (currentNode != nullptr)
-	{
-		if (currentNode->mData == searchKey)
-		{
-			found = true;
-			break;
-		}
-		else if (currentNode->mData < searchKey)
-		{
-			break;
-		}
-		else
-		{
-			currentNode = currentNode->mNext;
-		}
-	}
-
-	return found;
-}
-
-template<typename T>
-void DoublyLinkedList<T>::prepend(T data)
-{
-	Node<T> *newNode = new Node<T>(data);
-
-	if (newNode == nullptr)
+	//List is already empty.
+	if (mHead == nullptr)
 	{
 		return;
 	}
-	else if (mHead == nullptr)
+
+	//While the element after head is not null.
+	while (mHead->mNext != nullptr)
 	{
-		mHead = newNode;
-		mTail = newNode;
-		++mLength;
+		mHead = mHead->mNext;
+		delete mHead->mPrev;
+		mHead->mPrev = nullptr;
+		--mLength;
 	}
-	else
+
+	//If there is only one element left in the list.
+	if (mHead == mTail)
 	{
-		mTail->mNext = newNode;
-		newNode->mPrev = mTail;
-		mTail = newNode;
-		++mLength;
+		delete mHead;
+		--mLength;
 	}
+
+	mHead = nullptr;
+	mTail = nullptr;
 }
 
-/* Pre:		None.
-*  Post:	None.
-*  Purpose: Prints the list from least to greatest.
-**************************************************************************************************/
-template<typename T>
-void DoublyLinkedList<T>::printListAscending()
-{
-	Node<T> *currentNode = mHead;
 
-	std::cout << "List has " << std::to_string(mLength) << " elements:";
-
-	while (currentNode != nullptr)
-	{
-		std::cout << " " << currentNode->mData;
-		currentNode = currentNode->mNext;
-	}
-
-	std::cout << std::endl;
-}
-
-/* Pre:		None.
-*  Post:	None.
-*  Purpose: Prints the list from greatest to least.
-**************************************************************************************************/
-template<typename T>
-void DoublyLinkedList<T>::printListDescending()
-{
-	Node<T> *currentNode = mTail;
-
-	std::cout << "List has " << std::to_string(mLength) << " elements:";
-
-	while (currentNode != nullptr)
-	{
-		std::cout << " " << currentNode->mData;
-		currentNode = currentNode->mPrev;
-	}
-
-	std::cout << std::endl;
-}
-
-/* Pre:		The data value to remove from the list.
-*  Post:	The amount of nodes removed from the list.
-*  Purpose: Removes **ALL OCCURENCES** of the data.
-**************************************************************************************************/
-template<typename T>
-int DoublyLinkedList<T>::removeAll(T data)
-{
-	int amountRemoved = 0;
-
-	if (mHead != nullptr)
-	{
-		Node<T> *prevNode;
-		Node<T> *currentNode = mHead;
-		Node<T> *nextNode;
-
-		while (currentNode != nullptr)
-		{
-			prevNode = currentNode->mPrev;
-			nextNode = currentNode->mNext;
-
-			if (currentNode->mData == data)
-			{
-				if (prevNode != nullptr)
-				{
-					prevNode->mNext = nextNode;
-				}
-				else
-				{
-					mHead = currentNode->mNext;
-				}
-
-				if (nextNode != nullptr)
-				{
-					nextNode->mPrev = prevNode;
-				}
-				else
-				{
-					mTail = currentNode->mPrev;
-				}
-
-				currentNode->mPrev = nullptr;
-				currentNode->mNext = nullptr;
-				delete currentNode;
-				++amountRemoved;
-				--mLength;
-			}
-
-			currentNode = nextNode;
-		}
-	}
-
-	return amountRemoved;
-}
-
-/* Pre:		The index in the list to remove the node.
-*  Post:	The data that was in the removed node.
-*  Purpose: To remove a node in the list at a specific index.
-**************************************************************************************************/
+/*
+* Pre: The index to remove at.
+* Post: None.
+* Purpose: Deletes the node at the specified index
+* Author: Andrew Rimpici
+*/
 template<typename T>
 T DoublyLinkedList<T>::removeAt(int index)
 {
@@ -555,44 +471,121 @@ T DoublyLinkedList<T>::removeAt(int index)
 	}
 }
 
-template<typename T>
-DoublyLinkedList<T>* DoublyLinkedList<T>::merge(DoublyLinkedList<T> *first, DoublyLinkedList<T> *second)
-{
-	if (first == nullptr && second == nullptr)
-	{
-		return nullptr;
-	}
-	else if (first != nullptr && second == nullptr)
-	{
-		return first->copy();
-	}
-	else if (first == nullptr && second != nullptr)
-	{
-		return second->copy();
-	}
-	else if (second->mLength <= 0)
-	{
-		return first->copy();
-	}
-	else if (first->mLength <= 0)
-	{
-		return second->copy();
-	}
-	else
-	{
-		DoublyLinkedList<T> *mergedList = new DoublyLinkedList<T>();
-		Node<T> *list1CurrentNode = first->mHead;
-		Node<T> *list2CurrentNode = second->mHead;
-		int targetLength = first->mLength + second->mLength;
 
-		while (mergedList->mLength < targetLength)
+/*
+* Pre: None.
+* Post: Returns true if list is empty and false otherwise.
+* Purpose: Checks if the list is empty.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+bool DoublyLinkedList<T>::isEmpty()
+{
+	return mHead == nullptr;
+}
+
+
+/*
+* Pre: None.
+* Post: Returns the number of nodes in the list.
+* Purpose: To get the length of the list.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+int DoublyLinkedList<T>::getLength() const
+{
+	return mLength;
+}
+
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Prints out the list to the console.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+void DoublyLinkedList<T>::print() const
+{
+	Node<T> *currentNode = mHead;
+
+	std::cout << "Doubly Linked List has " << std::to_string(mLength) << " elements: ";
+
+	if (currentNode == nullptr)
+	{
+		std::cout << std::endl;
+		return;
+	}
+
+	while (currentNode->mNext != nullptr)
+	{
+		std::cout << currentNode->mData << " ";
+		currentNode = currentNode->mNext;
+	}
+
+	std::cout << currentNode->mData << " " << std::endl;
+}
+
+
+/*
+* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+* Post: Returns true if searchkey is in the list and false otherwise.
+* Purpose: To check if searchkey is in the list.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+bool DoublyLinkedList<T>::sequentialSearch(T searchKey, bool isSorted)
+{
+	Node<T> *currentNode = mHead;
+	T currentElement;
+	bool isFound = false;
+
+	while (currentNode != nullptr)
+	{
+		currentElement = currentNode->mData;
+
+		if (currentElement == searchKey)
+		{
+			isFound = true;
+			break;
+		}
+		else if (isSorted && searchKey < currentElement)
+		{
+			break;
+		}
+		else
+		{
+			currentNode = currentNode->mNext;
+		}
+	}
+
+	return isFound;
+}
+
+
+/*
+* Pre: Two lists to merge together.
+* Post: Returns a new linked list.
+* Purpose: Merges the two lists together.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+void DoublyLinkedList<T>::merge(DoublyLinkedList<T> &first, DoublyLinkedList<T> &second, DoublyLinkedList<T> &destination)
+{
+	if (first.mLength > 0 && second.mLength > 0)
+	{
+		Node<T> *list1CurrentNode = first.mHead;
+		Node<T> *list2CurrentNode = second.mHead;
+		int targetLength = first.mLength + second.mLength;
+
+		while (destination.mLength < targetLength)
 		{
 			if (list1CurrentNode == nullptr)
 			{
 				//add rest of list2 to merge list
 				while (list2CurrentNode != nullptr)
 				{
-					mergedList->prepend(list2CurrentNode->mData);
+					destination.append(list2CurrentNode->mData);
 					list2CurrentNode = list2CurrentNode->mNext;
 				}
 			}
@@ -601,26 +594,140 @@ DoublyLinkedList<T>* DoublyLinkedList<T>::merge(DoublyLinkedList<T> *first, Doub
 				//add rest of list1 to merge list
 				while (list1CurrentNode != nullptr)
 				{
-					mergedList->prepend(list1CurrentNode->mData);
+					destination.append(list1CurrentNode->mData);
 					list1CurrentNode = list1CurrentNode->mNext;
 				}
 			}
 			else if (list1CurrentNode->mData >= list2CurrentNode->mData)
 			{
 				//add list2data to merge list
-				mergedList->prepend(list2CurrentNode->mData);
+				destination.append(list2CurrentNode->mData);
 				list2CurrentNode = list2CurrentNode->mNext;
 			}
 			else if (list2CurrentNode->mData >= list1CurrentNode->mData)
 			{
 				//add list1data to merge list
-				mergedList->prepend(list1CurrentNode->mData);
+				destination.append(list1CurrentNode->mData);
 				list1CurrentNode = list1CurrentNode->mNext;
 			}
 		}
-
-		return mergedList;
 	}
+}
+
+
+/*
+* Pre: None.
+* Post: A new DoublyLinkedList.
+* Purpose: To copy a linked list into a new one.
+* Author: Andrew Rimpici
+*/
+template<typename T>
+DoublyLinkedList<T>* DoublyLinkedList<T>::copy()
+{
+	DoublyLinkedList<T> *another = new DoublyLinkedList<T>();
+	Node<T> *currentNode = mHead;
+
+	for (int i = 0; i < mLength; ++i)
+	{
+		another->insert(currentNode->mData);
+		currentNode = currentNode->mNext;
+	}
+
+	return another;
+}
+
+template<typename T>
+T DoublyLinkedList<T>::getData(int index) const
+{
+	int i;
+	Node<T> *currentNode;
+
+	if (index < 0 || index >= mLength)
+	{
+		return T();
+	}
+	else
+	{
+		currentNode = mHead;
+		for (i = 0; i < index; ++i)
+		{
+			currentNode = currentNode->mNext;
+		}
+
+		return currentNode->mData;
+	}
+}
+
+template<typename T>
+void DoublyLinkedList<T>::setData(int index, T data)
+{
+	int i;
+	Node<T> *currentNode;
+
+	if (index < 0 || index >= mLength)
+	{
+		return;
+	}
+	else
+	{
+		currentNode = mHead;
+		for (i = 0; i < index; ++i)
+		{
+			currentNode = currentNode->mNext;
+		}
+
+		currentNode->mData = data;
+	}
+}
+
+template<typename T>
+int DoublyLinkedList<T>::removeAll(T data)
+{
+	int amountRemoved = 0;
+
+	if (mHead != nullptr)
+	{
+		Node<T> *prevNode;
+		Node<T> *currentNode = mHead;
+		Node<T> *nextNode;
+
+		while (currentNode != nullptr)
+		{
+			prevNode = currentNode->mPrev;
+			nextNode = currentNode->mNext;
+
+			if (currentNode->mData == data)
+			{
+				if (prevNode != nullptr)
+				{
+					prevNode->mNext = nextNode;
+				}
+				else
+				{
+					mHead = currentNode->mNext;
+				}
+
+				if (nextNode != nullptr)
+				{
+					nextNode->mPrev = prevNode;
+				}
+				else
+				{
+					mTail = currentNode->mPrev;
+				}
+
+				currentNode->mPrev = nullptr;
+				currentNode->mNext = nullptr;
+				delete currentNode;
+				++amountRemoved;
+				--mLength;
+			}
+
+			currentNode = nextNode;
+		}
+	}
+
+	return amountRemoved;
 }
 
 #endif

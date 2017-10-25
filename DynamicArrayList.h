@@ -2,8 +2,8 @@
 *	Author:				Andrew Rimpici, Kevin Eaton
 *	Class:				Data Structures and Algorithms CSI-281-01
 *	Assignment:			PA5
-*	Date Assigned:		10/16/2017
-*	Due Date:			10/19/2017
+*	Date Assigned:		10/19/2017
+*	Due Date:			10/26/2017
 *
 *	Description:
 *		A program that tests the insertion and deletion of different data structures.
@@ -22,70 +22,514 @@
 #define DYNAMICARRAYLIST_H_
 
 #include <iostream>
-#include "Functions.h"
+#include <string>
 
-template<typename T>
+template <typename T>
 class DynamicArrayList
 {
 private:
 	static const int CAPACITY_MULTIPLIER = 10;
 	static const int DEFAULT_CAPACITY = 10;
 	int mCapacity;
-	int mLength;
-	T* mArrPtr;
+	int mSize;
+	T *mArrPtr;
 
+	/*
+	* Pre: The capacity for the arraylist.
+	* Post: None.
+	* Purpose: To create the underlying array with the capacity given.
+	* Author: Andrew Rimpici
+	*/
 	void resizeArray(int newCapacity);
 
 public:
+
+	/*
+	* Pre: The starting capacity of the arraylist.
+	* Post: Returns a DynamicArrayList object.
+	* Purpose: Creates a DynamicArrayList object.
+	* Author: Andrew Rimpici
+	*/
 	DynamicArrayList(int capacity = DEFAULT_CAPACITY);
+	
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Destroys a DynamicArrayList object.
+	* Author: Andrew Rimpici
+	*/
 	~DynamicArrayList();
 
+	/*
+	* Pre: The data to append to the dynamic arraylist.
+	* Post: None.
+	* Purpose: Adds the data to the end of the list.
+	* Author: Andrew Rimpici
+	*/
+	void append(T element);
+
+	/*
+	* Pre: The data to prepend to the arraylist.
+	* Post: None.
+	* Purpose: Adds the data to the beginning of the list.
+	* Author: Andrew Rimpici
+	*/
+	void prepend(T element);
+
+	/*
+	* Pre: The data to insert into the dynamic array.
+	* Post: None.
+	* Purpose: Adds the data to the list in ascending order.
+	* Author: Andrew Rimpici
+	*/
+	void insert(T element);
+
+	/*
+	* Pre: The index and data to insert into the arraylist.
+	* Post: None.
+	* Purpose: Adds the data to the list at the specified index.
+	* Author: Andrew Rimpici
+	*/
+	void insert(int index, T element);
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Deletes all of the elements from the list.
+	* Author: Andrew Rimpici
+	*/
+	void clear();
+
+	/*
+	* Pre: The index to remove at.
+	* Post: None.
+	* Purpose: Deletes the node at the specified index
+	* Author: Andrew Rimpici
+	*/
+	bool removeAt(int index);
+
+	/*
+	* Pre: None.
+	* Post: Returns true if list is empty and false otherwise.
+	* Purpose: Checks if the list is empty.
+	* Author: Andrew Rimpici
+	*/
+	bool isEmpty();
+
+	/*
+	* Pre: None.
+	* Post: Returns the number of elements in the list.
+	* Purpose: To get the length of the list.
+	* Author: Andrew Rimpici
+	*/
+	int  getSize() const;
+
+
+	/*
+	* Pre: None.
+	* Post: Returns the elements at the index spot.
+	* Purpose: To get the element.
+	* Author: Andrew Rimpici
+	*/
+	T get(int index) const;
+
+	/*
+	* Pre: None.
+	* Post: None.
+	* Purpose: Prints out the list to the console.
+	* Author: Andrew Rimpici
+	*/
+	void print() const;
+
+	/*
+	* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+	* Post: Returns true if searchkey is in the list and false otherwise.
+	* Purpose: To check if searchkey is in the list.
+	* Author: Andrew Rimpici
+	*/
+	bool sequentialSearch(T searchKey, bool isSorted);
+
+	/*
+	* Pre: Two lists to merge together.
+	* Post: None.
+	* Purpose: Merges the two lists together.
+	* Author: Kevin Eaton
+	*/
+	static void merge(DynamicArrayList<T> &first, DynamicArrayList<T> &second, DynamicArrayList<T> &destination);
+
+	//May not need these.
 	void add(T element);
 	DynamicArrayList<T>* copy();
-	T	 get(int index) const;
-	int  getSize() const;
-	void insert(int index, T element);
-	void print() const;
 	bool remove(T element);
-	bool removeAt(int index);
 	bool set(int index, T element);
 	void sort();
-
 	T	 operator[](int index) const;
 
-	static DynamicArrayList<T>* merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second);
 };
 
-template<typename T>
+
+/*
+* Pre: The capacity for the arraylist.
+* Post: None.
+* Purpose: To create the underlying array with the capacity given.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::resizeArray(int newCapacity)
+{
+	mCapacity = newCapacity;
+	T *newArr = new T[mCapacity];
+
+	int i;
+	for (i = 0; i < mSize; ++i)
+	{
+		newArr[i] = mArrPtr[i];
+	}
+
+	delete[] mArrPtr;
+	mArrPtr = newArr;
+
+}
+
+
+/*
+* Pre: The starting capacity of the arraylist.
+* Post: Returns a DynamicArrayList object.
+* Purpose: Creates a DynamicArrayList object.
+* Author: Andrew Rimpici
+*/
+template <typename T>
 DynamicArrayList<T>::DynamicArrayList(int capacity) :
 	mCapacity(capacity),
-	mLength(0),
+	mSize(0),
 	mArrPtr(new T[mCapacity])
 {
 	
 }
 
-template<typename T>
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Destroys a DynamicArrayList object.
+* Author: Andrew Rimpici
+*/
+template <typename T>
 DynamicArrayList<T>::~DynamicArrayList()
 {
-	delete[] mArrPtr;
+	clear();
 }
 
-template<typename T>
-void DynamicArrayList<T>::add(T element)
+
+/*
+* Pre: The data to append to the dynamic arraylist.
+* Post: None.
+* Purpose: Adds the data to the end of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::append(T element)
 {
-	if (mLength == mCapacity)
+	insert(mSize, element);
+}
+
+
+/*
+* Pre: The data to prepend to the arraylist.
+* Post: None.
+* Purpose: Adds the data to the beginning of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::prepend(T element)
+{
+	insert(0, element);
+}
+
+
+/*
+* Pre: The data to insert into the dynamic array.
+* Post: None.
+* Purpose: Adds the data to the list in ascending order.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::insert(T element)
+{
+	int i;
+	int shiftIndex = mSize;
+
+	for (i = 0; i < mSize; ++i)
+	{
+		if (element <= mArrPtr[i])
+		{
+			shiftIndex = i;
+			break;
+		}
+	}
+
+	insert(shiftIndex, element);
+}
+
+
+/*
+* Pre: The index and data to insert into the arraylist.
+* Post: None.
+* Purpose: Adds the data to the list at the specified index.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::insert(int index, T element)
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mSize)
+	{
+		index = mSize;
+	}
+
+	if (mArrPtr == nullptr || mSize == mCapacity)
 	{
 		resizeArray(mCapacity * CAPACITY_MULTIPLIER);
 	}
 
-	mArrPtr[mLength] = element;
-	++mLength;
+	++mSize;
+
+	int i;
+	for (i = mSize - 1; i > index; --i)
+	{
+		mArrPtr[i] = mArrPtr[i - 1];
+	}
+
+	mArrPtr[index] = element;
+}
+
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Deletes all of the elements from the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::clear()
+{
+	delete[] mArrPtr;
+	mArrPtr = nullptr;
+	mSize = 0;
+	mCapacity = DEFAULT_CAPACITY;
+}
+
+
+/*
+* Pre: The index to remove at.
+* Post: None.
+* Purpose: Deletes the node at the specified index
+* Author: Andrew Rimpici
+*/
+template <typename T>
+bool DynamicArrayList<T>::removeAt(int index)
+{
+	bool removed = false;
+	if (index >= 0 && index < mSize)
+	{
+		int i;
+		for (i = index; i < mSize - 1; ++i)
+		{
+			mArrPtr[i] = mArrPtr[i + 1];
+		}
+
+		--mSize;
+		removed = true;
+
+		if (mSize <= (mCapacity / CAPACITY_MULTIPLIER))
+		{
+			resizeArray(mCapacity / CAPACITY_MULTIPLIER);
+		}
+	}
+
+	return removed;
+}
+
+
+/*
+* Pre: None.
+* Post: Returns true if list is empty and false otherwise.
+* Purpose: Checks if the list is empty.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+bool DynamicArrayList<T>::isEmpty()
+{
+	return mSize == 0;
+}
+
+
+/*
+* Pre: None.
+* Post: Returns the number of elements in the list.
+* Purpose: To get the length of the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+int DynamicArrayList<T>::getSize() const
+{
+	return mSize;
+}
+
+
+/*
+* Pre: None.
+* Post: Returns the elements at the index spot.
+* Purpose: To get the element.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+T DynamicArrayList<T>::get(int index) const
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	else if (index > mSize - 1)
+	{
+		index = mSize - 1;
+	}
+
+	return mArrPtr[index];
+}
+
+
+/*
+* Pre: None.
+* Post: None.
+* Purpose: Prints out the list to the console.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::print() const
+{
+	int i;
+	std::cout << "Dynamic ArrayList has " << std::to_string(mSize) << " elements: ";
+
+	if (mSize == 0)
+	{
+		std::cout << std::endl;
+		return;
+	}
+
+	for (i = 0; i < mSize - 1; ++i)
+	{
+		std::cout << mArrPtr[i] << " ";
+	}
+
+	std::cout << mArrPtr[mSize - 1] << std::endl;
+}
+
+
+/*
+* Pre: The searchkey and bool to know if the list is sorted in ascending order.
+* Post: Returns true if searchkey is in the list and false otherwise.
+* Purpose: To check if searchkey is in the list.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+bool DynamicArrayList<T>::sequentialSearch(T searchKey, bool isSorted)
+{
+	bool isFound = false;
+	int i;
+	T currentElement;
+
+	for (i = 0; i < mSize; ++i)
+	{
+		currentElement = mArrPtr[i];
+
+		if (currentElement == searchKey)
+		{
+			isFound = true;
+			break;
+		}
+		else if (isSorted && searchKey < currentElement)
+		{
+			break;
+		}
+	}
+
+	return isFound;
+}
+
+
+/*
+* Pre: Two lists to merge together.
+* Post: None.
+* Purpose: Merges the two lists together.
+* Author: Andrew Rimpici
+*/
+template <typename T>
+void DynamicArrayList<T>::merge(DynamicArrayList<T> &first, DynamicArrayList<T> &second, DynamicArrayList<T> &destination)
+{
+	if (first.mArrPtr != nullptr && second.mArrPtr != nullptr)
+	{
+		int firstIndex = 0, secondIndex = 0, mergedIndex = 0;
+		int mergedLength = first.mSize + second.mSize;
+		destination.clear();
+		destination.mArrPtr = new T[mergedLength];
+		destination.mSize = 0;
+		destination.mCapacity = mergedLength;
+
+		while (mergedIndex < mergedLength)
+		{
+			if (firstIndex >= first.mSize)
+			{
+				for (; secondIndex < second.mSize; ++secondIndex, ++mergedIndex)
+				{
+					destination.append(second.get(secondIndex));
+				}
+			}
+			else if (secondIndex >= second.mSize)
+			{
+				for (; firstIndex < first.mSize; ++firstIndex, ++mergedIndex)
+				{
+					destination.append(first.get(firstIndex));
+				}
+			}
+			else if (first.get(firstIndex) >= second.get(secondIndex))
+			{
+				destination.append(second.get(secondIndex));
+				++secondIndex;
+				++mergedIndex;
+			}
+			else if (second.get(secondIndex) >= first.get(firstIndex))
+			{
+				destination.append(first.get(firstIndex));
+				++firstIndex;
+				++mergedIndex;
+			}
+		}
+	}
+}
+
+
+
+
+
+template <typename T>
+void DynamicArrayList<T>::add(T element)
+{
+	if (mSize == mCapacity)
+	{
+		resizeArray(mCapacity * CAPACITY_MULTIPLIER);
+	}
+
+	mArrPtr[mSize] = element;
+	++mSize;
 
 	print();
 }
 
-template<typename T>
+template <typename T>
 DynamicArrayList<T>* DynamicArrayList<T>::copy()
 {
 	DynamicArrayList<T> *another = new DynamicArrayList<T>();
@@ -93,7 +537,7 @@ DynamicArrayList<T>* DynamicArrayList<T>::copy()
 	another->mCapacity = mCapacity;
 	int i;
 
-	for (i = 0; i < mLength; ++i)
+	for (i = 0; i < mSize; ++i)
 	{
 		another->add(get(i));
 	}
@@ -101,67 +545,13 @@ DynamicArrayList<T>* DynamicArrayList<T>::copy()
 	return another;
 }
 
-template<typename T>
-T DynamicArrayList<T>::get(int index) const
-{
-	return mArrPtr[index];
-}
 
-template<typename T>
-int DynamicArrayList<T>::getSize() const
-{
-	return mLength;
-}
-
-template<typename T>
-void DynamicArrayList<T>::insert(int index, T element)
-{
-	if (index < 0)
-	{
-		index = 0;
-	}
-	else if (index > mLength)
-	{
-		index = mLength;
-	}
-
-	if (mLength == mCapacity)
-	{
-		resizeArray(mCapacity * CAPACITY_MULTIPLIER);
-	}
-
-	++mLength;
-
-	int i;
-	for (i = mLength; i > index; --i)
-	{
-		mArrPtr[i] = mArrPtr[i - 1];
-	}
-
-	mArrPtr[index] = element;
-
-	print();
-}
-
-template<typename T>
-void DynamicArrayList<T>::print() const
-{
-	int i;
-
-	std::cout << "[";
-	for (i = 0; i < mLength - 1; ++i)
-	{
-		std::cout << mArrPtr[i] << " ";
-	}
-	std::cout << mArrPtr[mLength - 1] << "]" << std::endl;
-}
-
-template<typename T>
+template <typename T>
 bool DynamicArrayList<T>::remove(T element)
 {
 	bool removed = false;
 	int i;
-	for (i = 0; i < mLength; ++i)
+	for (i = 0; i < mSize; ++i)
 	{
 		if (mArrPtr[i] == element)
 		{
@@ -173,59 +563,17 @@ bool DynamicArrayList<T>::remove(T element)
 	return removed;
 }
 
-template<typename T>
-bool DynamicArrayList<T>::removeAt(int index)
-{
-	bool removed = false;
-	if (index >= 0 && index < mLength)
-	{
-		int i;
-		for (i = index; i < mLength - 1; ++i)
-		{
-			mArrPtr[i] = mArrPtr[i + 1];
-		}
 
-		--mLength;
-		removed = true;
-
-		if (mLength <= (mCapacity / CAPACITY_MULTIPLIER))
-		{
-			resizeArray(mCapacity / CAPACITY_MULTIPLIER);
-		}
-	}
-
-	print();
-	return removed;
-}
-
-template<typename T>
-void DynamicArrayList<T>::resizeArray(int newCapacity)
-{
-	mCapacity = newCapacity;
-	T *newArr = new T[mCapacity];
-	int i;
-
-	for (i = 0; i < mLength; ++i)
-	{
-		newArr[i] = mArrPtr[i];
-	}
-
-	delete[] mArrPtr;
-	mArrPtr = newArr;
-
-	std::cout << "CAPACITY: " << mCapacity << std::endl;
-}
-
-template<typename T>
+template <typename T>
 bool DynamicArrayList<T>::set(int index, T element)
 {
 	bool successful = false;
-	if (index >= 0 && index < mLength)
+	if (index >= 0 && index < mSize)
 	{
 		mArrPtr[index] = element;
 		successful = true;
 	}
-	else if (index == mLength)
+	else if (index == mSize)
 	{
 		add(element);
 		successful = true;
@@ -235,71 +583,16 @@ bool DynamicArrayList<T>::set(int index, T element)
 	return successful;
 }
 
-template<typename T>
+template <typename T>
 void DynamicArrayList<T>::sort()
 {
-	mergeSort(mArrPtr, 0, mLength - 1);
+	mergeSort(mArrPtr, 0, mSize - 1);
 }
 
-template<typename T>
+template <typename T>
 T DynamicArrayList<T>::operator[](int index) const
 {
 	return get(index);
-}
-
-template<typename T>
-DynamicArrayList<T>* DynamicArrayList<T>::merge(DynamicArrayList<T> *first, DynamicArrayList<T> *second)
-{
-	if (first == nullptr && second == nullptr)
-	{
-		return nullptr;
-	}
-	else if (first != nullptr && second == nullptr)
-	{
-		return first->copy();
-	}
-	else if (first == nullptr && second != nullptr)
-	{
-		return second->copy();
-	}
-	else
-	{
-		DynamicArrayList<T> *mergedList = new DynamicArrayList<T>(first->mLength + second->mLength);
-		int firstIndex = 0, secondIndex = 0, mergedIndex = 0;
-		int mergedLength = mergedList->mCapacity;
-
-		while (mergedIndex < mergedLength)
-		{
-			if (firstIndex >= first->mLength)
-			{
-				for (; secondIndex < second->mLength; ++secondIndex, ++mergedIndex)
-				{
-					mergedList->add(second->get(secondIndex));
-				}
-			}
-			else if (secondIndex >= second->mLength)
-			{
-				for (; firstIndex < first->mLength; ++firstIndex, ++mergedIndex)
-				{
-					mergedList->add(first->get(firstIndex));
-				}
-			}
-			else if (first->get(firstIndex) >= second->get(secondIndex))
-			{
-				mergedList->add(second->get(secondIndex));
-				++secondIndex;
-				++mergedIndex;
-			}
-			else if (second->get(secondIndex) >= first->get(firstIndex))
-			{
-				mergedList->add(first->get(firstIndex));
-				++firstIndex;
-				++mergedIndex;
-			}
-		}
-
-		return mergedList;
-	}
 }
 
 #endif
