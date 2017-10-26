@@ -188,7 +188,6 @@ void DynamicArrayList<T>::resizeArray(int newCapacity)
 
 	delete[] mArrPtr;
 	mArrPtr = newArr;
-
 }
 
 
@@ -344,9 +343,10 @@ bool DynamicArrayList<T>::removeAt(int index)
 		--mSize;
 		removed = true;
 
-		if (mSize <= (mCapacity / CAPACITY_MULTIPLIER))
+		int newCapacity = (mCapacity / CAPACITY_MULTIPLIER);
+		if (DEFAULT_CAPACITY <= newCapacity && mSize <= newCapacity)
 		{
-			resizeArray(mCapacity / CAPACITY_MULTIPLIER);
+			resizeArray(newCapacity);
 		}
 	}
 
@@ -389,15 +389,6 @@ int DynamicArrayList<T>::getSize() const
 template <typename T>
 T DynamicArrayList<T>::get(int index) const
 {
-	if (index < 0)
-	{
-		index = 0;
-	}
-	else if (index > mSize - 1)
-	{
-		index = mSize - 1;
-	}
-
 	return mArrPtr[index];
 }
 

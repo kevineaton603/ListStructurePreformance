@@ -1,0 +1,324 @@
+LINKED LIST TESTING
+
+ 0.0000e+00
+LinkedList : Size 1 : Insertion : Front :  2.4038e-04
+LinkedList : Size 1 : Deletion : Front :  2.7012e-04
+LinkedList : Size 1 : Insertion : Middle :  1.1177e-03
+LinkedList : Size 1 : Deletion : Middle :  1.3149e-03
+LinkedList : Size 1 : Insertion : End :  2.7493e-04
+LinkedList : Size 1 : Deletion : End :  2.1919e-03
+LinkedList : Size 2 : Insertion : Front :  1.9008e-03
+LinkedList : Size 2 : Deletion : Front :  2.0128e-03
+LinkedList : Size 2 : Insertion : Middle :  1.8715e-01
+LinkedList : Size 2 : Deletion : Middle :  1.6391e-01
+LinkedList : Size 2 : Insertion : End :  1.8836e-03
+LinkedList : Size 2 : Deletion : End :  2.7615e-01
+LinkedList : Size 3 : Insertion : Front :  2.0176e-02
+LinkedList : Size 3 : Deletion : Front :  2.1951e-02
+LinkedList : Size 3 : Insertion : Middle :  1.9872e+01
+LinkedList : Size 3 : Deletion : Middle :  1.8298e+01
+LinkedList : Size 3 : Insertion : End :  2.2042e-02
+LinkedList : Size 3 : Deletion : End :  2.9419e+01
+LinkedList : Size 1 : Search :  5.1080e-06
+LinkedList : Size 1 : Merge :  5.3694e-04
+LinkedList : Size 2 : Search :  6.0995e-05
+LinkedList : Size 2 : Merge :  4.6801e-03
+LinkedList : Size 3 : Search :  6.6524e-04
+LinkedList : Size 3 : Merge :  4.0405e-02
+DOUBLY LINKED LIST TESTING
+
+ 0.0000e+00
+DoublyLinkedList : Size 1 : Insertion : Front :  2.1604e-04
+DoublyLinkedList : Size 1 : Deletion : Front :  2.6592e-04
+DoublyLinkedList : Size 1 : Insertion : Middle :  1.5880e-03
+DoublyLinkedList : Size 1 : Deletion : Middle :  9.8344e-04
+DoublyLinkedList : Size 1 : Insertion : End :  2.5089e-04
+DoublyLinkedList : Size 1 : Deletion : End :  1.9570e-03
+DoublyLinkedList : Size 2 : Insertion : Front :  2.0994e-03
+DoublyLinkedList : Size 2 : Deletion : Front :  1.9152e-03
+DoublyLinkedList : Size 2 : Insertion : Middle :  1.4832e-01
+DoublyLinkedList : Size 2 : Deletion : Middle :  1.5367e-01
+DoublyLinkedList : Size 2 : Insertion : End :  1.8698e-03
+DoublyLinkedList : Size 2 : Deletion : End :  2.6360e-01
+DoublyLinkedList : Size 3 : Insertion : Front :  1.9329e-02
+DoublyLinkedList : Size 3 : Deletion : Front :  1.8815e-02
+DoublyLinkedList : Size 3 : Insertion : Middle :  1.7486e+01
+DoublyLinkedList : Size 3 : Deletion : Middle :  1.8725e+01
+DoublyLinkedList : Size 3 : Insertion : End :  1.9883e-02
+DoublyLinkedList : Size 3 : Deletion : End :  2.9121e+01
+DoublyLinkedList : Size 1 : Search :  4.8075e-06
+DoublyLinkedList : Size 1 : Merge :  6.3099e-04
+DoublyLinkedList : Size 2 : Search :  9.5249e-05
+DoublyLinkedList : Size 2 : Merge :  4.7168e-03
+DoublyLinkedList : Size 3 : Search :  5.9583e-04
+DoublyLinkedList : Size 3 : Merge :  4.1988e-02
+DYNAMIC ARRAY TESTING
+
+ 0.0000e+00
+DynamicArray : Size 1 : Insertion : Front :  1.7349e-03
+DynamicArray : Size 1 : Deletion : Front :  2.7229e-03
+DynamicArray : Size 1 : Insertion : Middle :  1.7592e-03
+DynamicArray : Size 1 : Deletion : Middle :  2.1189e-03
+DynamicArray : Size 1 : Insertion : End :  1.7607e-03
+DynamicArray : Size 1 : Deletion : End :  1.5582e-03
+DynamicArray : Size 2 : Insertion : Front :  1.5652e-01
+DynamicArray : Size 2 : Deletion : Front :  2.1591e-01
+DynamicArray : Size 2 : Insertion : Middle :  1.3499e-01
+DynamicArray : Size 2 : Deletion : Middle :  1.6178e-01
+DynamicArray : Size 2 : Insertion : End :  1.2663e-01
+DynamicArray : Size 2 : Deletion : End :  1.0844e-01
+DynamicArray : Size 3 : Insertion : Front :  1.3616e+01
+DynamicArray : Size 3 : Deletion : Front :  2.0925e+01
+DynamicArray : Size 3 : Insertion : Middle :  1.2996e+01
+DynamicArray : Size 3 : Deletion : Middle :  1.5564e+01
+DynamicArray : Size 3 : Insertion : End :  1.2450e+01
+DynamicArray : Size 3 : Deletion : End :  1.0086e+01
+DynamicArray : Size 1 : Search :  1.5023e-06
+DynamicArray : Size 1 : Merge :  1.3521e-05
+DynamicArray : Size 2 : Search :  1.1117e-05
+DynamicArray : Size 2 : Merge :  1.0366e-04
+DynamicArray : Size 3 : Search :  1.0817e-04
+DynamicArray : Size 3 : Merge :  1.0006e-03
+DYNAMIC ARRAYLIST TESTING
+
+ 0.0000e+00
+DynamicArrayList : Size 1 : Insertion : Front :  1.0838e-03
+DynamicArrayList : Size 1 : Deletion : Front :  1.1607e-03
+DynamicArrayList : Size 1 : Insertion : Middle :  6.2377e-04
+DynamicArray : Size 1 : Deletion : Middle :  5.9673e-04
+DynamicArrayList : Size 1 : Insertion : End :  5.1380e-05
+DynamicArrayList : Size 1 : Deletion : End :  1.1820e-03
+DynamicArrayList : Size 2 : Insertion : Front :  9.9097e-02
+DynamicArrayList : Size 2 : Deletion : Front :  1.0787e-01
+DynamicArrayList : Size 2 : Insertion : Middle :  4.8288e-02
+DynamicArrayList : Size 2 : Deletion : Middle :  5.6446e-02
+DynamicArrayList : Size 2 : Insertion : End :  3.7078e-04
+DynamicArrayList : Size 2 : Deletion : End :  1.0855e-01
+DynamicArrayList : Size 3 : Insertion : Front :  9.6615e+00
+DynamicArrayList : Size 3 : Deletion : Front :  1.0777e+01
+DynamicArrayList : Size 3 : Insertion : Middle :  4.8362e+00
+DynamicArrayList : Size 3 : Deletion : Middle :  5.3959e+00
+DynamicArrayList : Size 3 : Insertion : End :  3.5023e-03
+DynamicArrayList : Size 3 : Deletion : End :  1.0778e+01
+DynamicArrayList : Size 1 : Search :  2.1033e-06
+DynamicArrayList : Size 1 : Merge :  2.0792e-04
+DynamicArrayList : Size 2 : Search :  1.1718e-05
+DynamicArrayList : Size 2 : Merge :  2.2382e-03
+DynamicArrayList : Size 3 : Search :  1.1177e-04
+DynamicArrayList : Size 3 : Merge :  2.0899e-02
+LINKED LIST TESTING
+
+ 1.0000e+00
+LinkedList : Size 1 : Insertion : Front :  2.4789e-04
+LinkedList : Size 1 : Deletion : Front :  1.9200e-04
+LinkedList : Size 1 : Insertion : Middle :  1.3653e-03
+LinkedList : Size 1 : Deletion : Middle :  1.0048e-03
+LinkedList : Size 1 : Insertion : End :  2.4188e-04
+LinkedList : Size 1 : Deletion : End :  2.3662e-03
+LinkedList : Size 2 : Insertion : Front :  2.1604e-03
+LinkedList : Size 2 : Deletion : Front :  1.8981e-03
+LinkedList : Size 2 : Insertion : Middle :  1.7794e-01
+LinkedList : Size 2 : Deletion : Middle :  1.5603e-01
+LinkedList : Size 2 : Insertion : End :  1.8199e-03
+LinkedList : Size 2 : Deletion : End :  2.7204e-01
+LinkedList : Size 3 : Insertion : Front :  1.9487e-02
+LinkedList : Size 3 : Deletion : Front :  2.0035e-02
+LinkedList : Size 3 : Insertion : Middle :  2.4839e+01
+LinkedList : Size 3 : Deletion : Middle :  2.7458e+01
+LinkedList : Size 3 : Insertion : End :  2.0458e-02
+LinkedList : Size 3 : Deletion : End :  3.1068e+01
+LinkedList : Size 1 : Search :  3.6056e-06
+LinkedList : Size 1 : Merge :  5.1410e-04
+LinkedList : Size 2 : Search :  7.0911e-05
+LinkedList : Size 2 : Merge :  4.5644e-03
+LinkedList : Size 3 : Search :  5.2702e-04
+LinkedList : Size 3 : Merge :  4.1206e-02
+DOUBLY LINKED LIST TESTING
+
+ 1.0000e+00
+DoublyLinkedList : Size 1 : Insertion : Front :  2.3106e-04
+DoublyLinkedList : Size 1 : Deletion : Front :  2.3226e-04
+DoublyLinkedList : Size 1 : Insertion : Middle :  1.1060e-03
+DoublyLinkedList : Size 1 : Deletion : Middle :  1.0700e-03
+DoublyLinkedList : Size 1 : Insertion : End :  2.2655e-04
+DoublyLinkedList : Size 1 : Deletion : End :  2.2493e-03
+DoublyLinkedList : Size 2 : Insertion : Front :  2.0546e-03
+DoublyLinkedList : Size 2 : Deletion : Front :  1.8082e-03
+DoublyLinkedList : Size 2 : Insertion : Middle :  1.5426e-01
+DoublyLinkedList : Size 2 : Deletion : Middle :  1.5324e-01
+DoublyLinkedList : Size 2 : Insertion : End :  2.2178e-03
+DoublyLinkedList : Size 2 : Deletion : End :  2.6643e-01
+DoublyLinkedList : Size 3 : Insertion : Front :  1.8574e-02
+DoublyLinkedList : Size 3 : Deletion : Front :  1.9216e-02
+DoublyLinkedList : Size 3 : Insertion : Middle :  1.7653e+01
+DoublyLinkedList : Size 3 : Deletion : Middle :  1.9021e+01
+DoublyLinkedList : Size 3 : Insertion : End :  1.9769e-02
+DoublyLinkedList : Size 3 : Deletion : End :  2.9212e+01
+DoublyLinkedList : Size 1 : Search :  3.9061e-06
+DoublyLinkedList : Size 1 : Merge :  5.2161e-04
+DoublyLinkedList : Size 2 : Search :  9.4047e-05
+DoublyLinkedList : Size 2 : Merge :  4.8637e-03
+DoublyLinkedList : Size 3 : Search :  1.0580e-03
+DoublyLinkedList : Size 3 : Merge :  4.3055e-02
+DYNAMIC ARRAY TESTING
+
+ 1.0000e+00
+DynamicArray : Size 1 : Insertion : Front :  1.7604e-03
+DynamicArray : Size 1 : Deletion : Front :  3.1180e-03
+DynamicArray : Size 1 : Insertion : Middle :  1.8013e-03
+DynamicArray : Size 1 : Deletion : Middle :  2.1294e-03
+DynamicArray : Size 1 : Insertion : End :  1.7316e-03
+DynamicArray : Size 1 : Deletion : End :  1.5955e-03
+DynamicArray : Size 2 : Insertion : Front :  1.3734e-01
+DynamicArray : Size 2 : Deletion : Front :  2.1176e-01
+DynamicArray : Size 2 : Insertion : Middle :  1.3111e-01
+DynamicArray : Size 2 : Deletion : Middle :  1.5653e-01
+DynamicArray : Size 2 : Insertion : End :  1.2664e-01
+DynamicArray : Size 2 : Deletion : End :  1.0686e-01
+DynamicArray : Size 3 : Insertion : Front :  1.3466e+01
+DynamicArray : Size 3 : Deletion : Front :  2.0801e+01
+DynamicArray : Size 3 : Insertion : Middle :  1.2903e+01
+DynamicArray : Size 3 : Deletion : Middle :  1.5217e+01
+DynamicArray : Size 3 : Insertion : End :  1.2130e+01
+DynamicArray : Size 3 : Deletion : End :  9.8358e+00
+DynamicArray : Size 1 : Search :  1.5023e-06
+DynamicArray : Size 1 : Merge :  1.2620e-05
+DynamicArray : Size 2 : Search :  1.1117e-05
+DynamicArray : Size 2 : Merge :  1.1087e-04
+DynamicArray : Size 3 : Search :  1.1027e-04
+DynamicArray : Size 3 : Merge :  9.5099e-04
+DYNAMIC ARRAYLIST TESTING
+
+ 1.0000e+00
+DynamicArrayList : Size 1 : Insertion : Front :  1.0664e-03
+DynamicArrayList : Size 1 : Deletion : Front :  1.2043e-03
+DynamicArrayList : Size 1 : Insertion : Middle :  7.0670e-04
+DynamicArray : Size 1 : Deletion : Middle :  7.5358e-04
+DynamicArrayList : Size 1 : Insertion : End :  4.4770e-05
+DynamicArrayList : Size 1 : Deletion : End :  1.3524e-03
+DynamicArrayList : Size 2 : Insertion : Front :  9.8998e-02
+DynamicArrayList : Size 2 : Deletion : Front :  1.0490e-01
+DynamicArrayList : Size 2 : Insertion : Middle :  4.9013e-02
+DynamicArrayList : Size 2 : Deletion : Middle :  5.4561e-02
+DynamicArrayList : Size 2 : Insertion : End :  4.8526e-04
+DynamicArrayList : Size 2 : Deletion : End :  1.0449e-01
+DynamicArrayList : Size 3 : Insertion : Front :  9.4911e+00
+DynamicArrayList : Size 3 : Deletion : Front :  1.0586e+01
+DynamicArrayList : Size 3 : Insertion : Middle :  4.7423e+00
+DynamicArrayList : Size 3 : Deletion : Middle :  5.2968e+00
+DynamicArrayList : Size 3 : Insertion : End :  3.5726e-03
+DynamicArrayList : Size 3 : Deletion : End :  1.0593e+01
+DynamicArrayList : Size 1 : Search :  1.8028e-06
+DynamicArrayList : Size 1 : Merge :  2.2655e-04
+DynamicArrayList : Size 2 : Search :  1.8329e-05
+DynamicArrayList : Size 2 : Merge :  2.2541e-03
+DynamicArrayList : Size 3 : Search :  1.8118e-04
+DynamicArrayList : Size 3 : Merge :  2.1577e-02
+LINKED LIST TESTING
+
+ 2.0000e+00
+LinkedList : Size 1 : Insertion : Front :  2.8875e-04
+LinkedList : Size 1 : Deletion : Front :  2.1964e-04
+LinkedList : Size 1 : Insertion : Middle :  1.1042e-03
+LinkedList : Size 1 : Deletion : Middle :  1.0649e-03
+LinkedList : Size 1 : Insertion : End :  2.2956e-04
+LinkedList : Size 1 : Deletion : End :  2.1688e-03
+LinkedList : Size 2 : Insertion : Front :  2.0282e-03
+LinkedList : Size 2 : Deletion : Front :  1.8088e-03
+LinkedList : Size 2 : Insertion : Middle :  1.7704e-01
+LinkedList : Size 2 : Deletion : Middle :  1.5581e-01
+LinkedList : Size 2 : Insertion : End :  1.7701e-03
+LinkedList : Size 2 : Deletion : End :  2.6115e-01
+LinkedList : Size 3 : Insertion : Front :  1.9951e-02
+LinkedList : Size 3 : Deletion : Front :  1.8530e-02
+LinkedList : Size 3 : Insertion : Middle :  2.0035e+01
+LinkedList : Size 3 : Deletion : Middle :  1.8436e+01
+LinkedList : Size 3 : Insertion : End :  2.1991e-02
+LinkedList : Size 3 : Deletion : End :  2.8825e+01
+LinkedList : Size 1 : Search :  7.2113e-06
+LinkedList : Size 1 : Merge :  4.6993e-04
+LinkedList : Size 2 : Search :  7.1512e-05
+LinkedList : Size 2 : Merge :  4.5662e-03
+LinkedList : Size 3 : Search :  5.8591e-04
+LinkedList : Size 3 : Merge :  4.0775e-02
+DOUBLY LINKED LIST TESTING
+
+ 2.0000e+00
+DoublyLinkedList : Size 1 : Insertion : Front :  2.5209e-04
+DoublyLinkedList : Size 1 : Deletion : Front :  2.3647e-04
+DoublyLinkedList : Size 1 : Insertion : Middle :  1.2097e-03
+DoublyLinkedList : Size 1 : Deletion : Middle :  9.9485e-04
+DoublyLinkedList : Size 1 : Insertion : End :  3.1279e-04
+DoublyLinkedList : Size 1 : Deletion : End :  2.1168e-03
+DoublyLinkedList : Size 2 : Insertion : Front :  1.8365e-03
+DoublyLinkedList : Size 2 : Deletion : Front :  2.2809e-03
+DoublyLinkedList : Size 2 : Insertion : Middle :  1.4896e-01
+DoublyLinkedList : Size 2 : Deletion : Middle :  1.5345e-01
+DoublyLinkedList : Size 2 : Insertion : End :  1.8548e-03
+DoublyLinkedList : Size 2 : Deletion : End :  2.5785e-01
+DoublyLinkedList : Size 3 : Insertion : Front :  1.9402e-02
+DoublyLinkedList : Size 3 : Deletion : Front :  1.8533e-02
+DoublyLinkedList : Size 3 : Insertion : Middle :  1.6966e+01
+DoublyLinkedList : Size 3 : Deletion : Middle :  1.8596e+01
+DoublyLinkedList : Size 3 : Insertion : End :  2.0415e-02
+DoublyLinkedList : Size 3 : Deletion : End :  2.9087e+01
+DoublyLinkedList : Size 1 : Search :  6.9108e-06
+DoublyLinkedList : Size 1 : Merge :  6.0184e-04
+DoublyLinkedList : Size 2 : Search :  6.1596e-05
+DoublyLinkedList : Size 2 : Merge :  4.1885e-03
+DoublyLinkedList : Size 3 : Search :  5.6939e-04
+DoublyLinkedList : Size 3 : Merge :  4.2588e-02
+DYNAMIC ARRAY TESTING
+
+ 2.0000e+00
+DynamicArray : Size 1 : Insertion : Front :  2.2800e-03
+DynamicArray : Size 1 : Deletion : Front :  2.6694e-03
+DynamicArray : Size 1 : Insertion : Middle :  1.6721e-03
+DynamicArray : Size 1 : Deletion : Middle :  2.1099e-03
+DynamicArray : Size 1 : Insertion : End :  1.7043e-03
+DynamicArray : Size 1 : Deletion : End :  1.6478e-03
+DynamicArray : Size 2 : Insertion : Front :  1.3368e-01
+DynamicArray : Size 2 : Deletion : Front :  2.0779e-01
+DynamicArray : Size 2 : Insertion : Middle :  1.2826e-01
+DynamicArray : Size 2 : Deletion : Middle :  1.5836e-01
+DynamicArray : Size 2 : Insertion : End :  1.2402e-01
+DynamicArray : Size 2 : Deletion : End :  1.0693e-01
+DynamicArray : Size 3 : Insertion : Front :  1.3237e+01
+DynamicArray : Size 3 : Deletion : Front :  2.0424e+01
+DynamicArray : Size 3 : Insertion : Middle :  1.2678e+01
+DynamicArray : Size 3 : Deletion : Middle :  1.5134e+01
+DynamicArray : Size 3 : Insertion : End :  1.2131e+01
+DynamicArray : Size 3 : Deletion : End :  9.8159e+00
+DynamicArray : Size 1 : Search :  1.5023e-06
+DynamicArray : Size 1 : Merge :  1.4723e-05
+DynamicArray : Size 2 : Search :  1.0817e-05
+DynamicArray : Size 2 : Merge :  1.0667e-04
+DynamicArray : Size 3 : Search :  1.0967e-04
+DynamicArray : Size 3 : Merge :  9.8163e-04
+DYNAMIC ARRAYLIST TESTING
+
+ 2.0000e+00
+DynamicArrayList : Size 1 : Insertion : Front :  1.3960e-03
+DynamicArrayList : Size 1 : Deletion : Front :  1.1445e-03
+DynamicArrayList : Size 1 : Insertion : Middle :  5.8712e-04
+DynamicArray : Size 1 : Deletion : Middle :  6.2498e-04
+DynamicArrayList : Size 1 : Insertion : End :  4.9277e-05
+DynamicArrayList : Size 1 : Deletion : End :  1.1568e-03
+DynamicArrayList : Size 2 : Insertion : Front :  9.9192e-02
+DynamicArrayList : Size 2 : Deletion : Front :  1.0571e-01
+DynamicArrayList : Size 2 : Insertion : Middle :  4.7468e-02
+DynamicArrayList : Size 2 : Deletion : Middle :  5.7036e-02
+DynamicArrayList : Size 2 : Insertion : End :  4.9668e-04
+DynamicArrayList : Size 2 : Deletion : End :  1.0463e-01
+DynamicArrayList : Size 3 : Insertion : Front :  9.4739e+00
+DynamicArrayList : Size 3 : Deletion : Front :  1.0602e+01
+DynamicArrayList : Size 3 : Insertion : Middle :  4.7397e+00
+DynamicArrayList : Size 3 : Deletion : Middle :  5.3037e+00
+DynamicArrayList : Size 3 : Insertion : End :  3.7520e-03
+DynamicArrayList : Size 3 : Deletion : End :  1.0592e+01
+DynamicArrayList : Size 1 : Search :  1.8028e-06
+DynamicArrayList : Size 1 : Merge :  2.3467e-04
+DynamicArrayList : Size 2 : Search :  1.7427e-05
+DynamicArrayList : Size 2 : Merge :  2.6102e-03
+DynamicArrayList : Size 3 : Search :  1.1418e-04
+DynamicArrayList : Size 3 : Merge :  2.1784e-02

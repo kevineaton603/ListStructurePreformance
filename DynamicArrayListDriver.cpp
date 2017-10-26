@@ -18,7 +18,7 @@
 *		of future plagiarism checking)
 */
 
-#include <iostream>
+/*#include <iostream>
 #include "DynamicArrayList.h"
 
 int main()
@@ -128,4 +128,4 @@ int main()
 	delete list2;
 	delete merge;
 	return 0;
-}
+}*/

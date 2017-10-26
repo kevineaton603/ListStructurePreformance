@@ -476,7 +476,7 @@ void LinkedList<T>::print() const
 		currentNode = currentNode->mNext;
 	}
 
-	std::cout << currentNode->mData << " " << std::endl;
+	std::cout << currentNode->mData << std::endl;
 }
 
 
