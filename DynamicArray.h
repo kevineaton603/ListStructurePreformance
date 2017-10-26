@@ -144,14 +144,6 @@ public:
 	* Author: Kevin Eaton
 	*/
 	static void merge(DynamicArray<T> &first, DynamicArray<T> &second, DynamicArray<T> &destination);
-
-
-	//I may not need these functions
-	void remove(T element);
-	void remove(T *list, int size);
-	void remove(DynamicArray<T> *list);
-	void sort();
-	T	 operator[](int index);
 };
 
 
@@ -462,101 +454,6 @@ void DynamicArray<T>::merge(DynamicArray<T> &first, DynamicArray<T> &second, Dyn
 			k++;
 		}
 	}
-}
-
-
-
-
-
-
-template <typename T>
-void DynamicArray<T>::remove(T element)
-{
-	remove(&element, 1);
-}
-
-template <typename T>
-void DynamicArray<T>::remove(T *list, int size)
-{
-	T *newList;
-	int i, j, k, newSize;
-	
-	if (mArray == nullptr)
-	{
-		std::cout << "There are no elements in this array\n\n";
-	}
-	else
-	{
-		i = j = k = 0;
-		newSize = mSize;
-
-		while (i < mSize && j < size && newSize <= 0)
-		{
-			if (mArray[i] == list[j])
-			{
-				newSize--;
-				i++;
-			}
-			else if (mArray[i] < list[j])
-			{
-				i++;
-			}
-			else
-			{
-				j++;
-			}
-		}
-
-		if (newSize == mSize)
-		{
-			std::cout << "No changes were made to the Array!\n\n";
-		}
-		else if (mSize <= 0)
-		{
-			clear();
-		}
-		else
-		{
-			newList = new T[newSize];
-			i = j = k = 0;
-
-			while (i < this->mSize && j < size)
-			{
-				if (mArray[i] > list[j])
-				{
-					j++;
-				}
-				else if (mArray[i] == list[j])
-				{
-					i++;
-				}
-				else if (mArray[i] < list[j])
-				{
-					newList[k] = mArray[i];
-					i++;
-					k++;
-				}
-			}
-		}
-	}
-}
-
-template <typename T>
-void DynamicArray<T>::remove(DynamicArray<T> *list)
-{
-	remove(list->getArray(), list->mSize);
-}
-
-template <typename T>
-void DynamicArray<T>::sort()
-{
-	mergeSort(mArray, 0, mSize - 1);
-}
-
-template <typename T>
-T DynamicArray<T>::operator[](int index)
-{
-	return mArray[index];
 }
 
 #endif

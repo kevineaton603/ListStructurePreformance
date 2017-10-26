@@ -156,15 +156,6 @@ public:
 	* Author: Kevin Eaton
 	*/
 	static void merge(DynamicArrayList<T> &first, DynamicArrayList<T> &second, DynamicArrayList<T> &destination);
-
-	//May not need these.
-	void add(T element);
-	DynamicArrayList<T>* copy();
-	bool remove(T element);
-	bool set(int index, T element);
-	void sort();
-	T	 operator[](int index) const;
-
 };
 
 
@@ -500,90 +491,6 @@ void DynamicArrayList<T>::merge(DynamicArrayList<T> &first, DynamicArrayList<T> 
 			}
 		}
 	}
-}
-
-
-
-
-
-template <typename T>
-void DynamicArrayList<T>::add(T element)
-{
-	if (mSize == mCapacity)
-	{
-		resizeArray(mCapacity * CAPACITY_MULTIPLIER);
-	}
-
-	mArrPtr[mSize] = element;
-	++mSize;
-
-	print();
-}
-
-template <typename T>
-DynamicArrayList<T>* DynamicArrayList<T>::copy()
-{
-	DynamicArrayList<T> *another = new DynamicArrayList<T>();
-
-	another->mCapacity = mCapacity;
-	int i;
-
-	for (i = 0; i < mSize; ++i)
-	{
-		another->add(get(i));
-	}
-
-	return another;
-}
-
-
-template <typename T>
-bool DynamicArrayList<T>::remove(T element)
-{
-	bool removed = false;
-	int i;
-	for (i = 0; i < mSize; ++i)
-	{
-		if (mArrPtr[i] == element)
-		{
-			removeAt(i);
-			removed = true;
-		}
-	}
-
-	return removed;
-}
-
-
-template <typename T>
-bool DynamicArrayList<T>::set(int index, T element)
-{
-	bool successful = false;
-	if (index >= 0 && index < mSize)
-	{
-		mArrPtr[index] = element;
-		successful = true;
-	}
-	else if (index == mSize)
-	{
-		add(element);
-		successful = true;
-	}
-
-	print();
-	return successful;
-}
-
-template <typename T>
-void DynamicArrayList<T>::sort()
-{
-	mergeSort(mArrPtr, 0, mSize - 1);
-}
-
-template <typename T>
-T DynamicArrayList<T>::operator[](int index) const
-{
-	return get(index);
 }
 
 #endif

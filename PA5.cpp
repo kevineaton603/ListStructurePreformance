@@ -2,8 +2,8 @@
 *	Author:				Andrew Rimpici, Kevin Eaton
 *	Class:				Data Structures and Algorithms CSI-281-01
 *	Assignment:			PA5
-*	Date Assigned:		10/16/2017
-*	Due Date:			10/19/2017
+*	Date Assigned:		10/19/2017
+*	Due Date:			10/26/2017
 *
 *	Description:
 *		A program that tests the insertion and deletion of different data structures.
